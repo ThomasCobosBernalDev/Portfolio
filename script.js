@@ -27,3 +27,12 @@ if (!prefersReduced && 'IntersectionObserver' in window){
     obs.observe(el);
   });
 }
+
+function jokeModeOn() {
+  document.body.classList.add('flash-effect');
+}
+function jokeModeOff() {
+  document.body.classList.remove('flash-effect');
+}
+
+
