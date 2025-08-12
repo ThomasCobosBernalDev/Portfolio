@@ -149,4 +149,16 @@ a{color:var(--text);text-decoration:none}
 .reveal.fade-right{transform:translateX(16px)}
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1; transform:none; transition:none}
+} 
+
+/* --- EPIC JOKE MODE --- */
+.flash-effect {
+  animation: flashBW 0.2s infinite; /* speed of flashing */
 }
+
+@keyframes flashBW {
+  0% { filter: invert(0); background-color: white; }
+  50% { filter: invert(1); background-color: black; }
+  100% { filter: invert(0); background-color: white; }
+}
+
