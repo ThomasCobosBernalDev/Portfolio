@@ -26,7 +26,7 @@
 <!-- Hero -->
 <section class="hero" id="top">
   <div class="container wrap">
-    <div>
+    <div data-reveal class="fade-left">
       <span class="badge">U.S. Marine → Aspiring AI Engineer</span>
       <h1>Leadership & operations—now applied to code, data, and ML.</h1>
       <p class="lead">I’m transitioning from the Marine Corps into AI/engineering. I focus on clear communication, fast problem-solving, and building a solid foundation in Python and web technologies.</p>
@@ -35,7 +35,7 @@
         <a href="resume.pdf" class="btn" target="_blank" rel="noopener">Download Résumé</a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-reveal>
       <h3 style="margin-top:0">Quick Stats</h3>
       <ul class="bullets">
         <li>Infantry Team Leader • Scout • Marksmanship Coach (MOS 0933)</li>
@@ -49,24 +49,24 @@
 <!-- About -->
 <section id="about" class="section">
   <div class="container">
-    <h2>About</h2>
-    <p class="lead">Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments, then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.</p>
-    <ul class="tags">
+    <h2 data-reveal>About</h2>
+    <p class="lead" data-reveal>Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments, then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.</p>
+    <ul class="tags" data-reveal>
       <li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
       <li>Data Analysis</li><li>ML Fundamentals</li><li>Problem-Solving</li>
     </ul>
 
-    <h3 style="margin-top:28px">Personal Gallery</h3>
+    <h3 style="margin-top:28px" data-reveal>Personal Gallery</h3>
     <div class="gallery">
-      <figure>
+      <figure data-reveal class="fade-right">
         <img src="img/japan.jpg" alt="Joint training in Japan">
         <figcaption>Japan joint training — international coordination</figcaption>
       </figure>
-      <figure>
+      <figure data-reveal>
         <img src="img/la.jpg" alt="Multi-agency operations in Los Angeles">
         <figcaption>Los Angeles support — multi-agency operations</figcaption>
       </figure>
-      <figure>
+      <figure data-reveal class="fade-left">
         <img src="img/volunteer.jpg" alt="Volunteering in Okinawa river cleanup">
         <figcaption>Okinawa volunteering — community impact</figcaption>
       </figure>
@@ -77,17 +77,17 @@
 <!-- Experience -->
 <section id="experience" class="section">
   <div class="container">
-    <h2>Experience</h2>
+    <h2 data-reveal>Experience</h2>
     <div class="grid">
-      <div class="card">
+      <div class="card" data-reveal>
         <h3>U.S. Marine Corps</h3>
         <p>Led infantry teams, coordinated operations, trained in marksmanship, and worked in high-pressure environments.</p>
       </div>
-      <div class="card">
+      <div class="card" data-reveal class="fade-right">
         <h3>International Training</h3>
         <p>Joint training operations in Japan; coordinated with allied forces to meet mission goals.</p>
       </div>
-      <div class="card">
+      <div class="card" data-reveal class="fade-left">
         <h3>Tech Transition</h3>
         <p>Studying AI engineering and web development, building foundational skills in Python, HTML, CSS, and JavaScript.</p>
       </div>
@@ -98,15 +98,19 @@
 <!-- Projects -->
 <section id="projects" class="section">
   <div class="container">
-    <h2>Projects</h2>
+    <h2 data-reveal>Projects</h2>
     <div class="grid">
-      <div class="card">
+      <div class="card" data-reveal>
         <h3>Portfolio Website</h3>
         <p>This website — designed and coded to showcase my work, skills, and background.</p>
       </div>
-      <div class="card">
+      <div class="card" data-reveal>
         <h3>HTML/CSS Projects</h3>
         <p>Small front-end practice projects demonstrating layout, styling, and responsive design.</p>
+      </div>
+      <div class="card" data-reveal>
+        <h3>Python Warm-ups</h3>
+        <p>Short scripts covering I/O, control flow, and data structures with an emphasis on readable code.</p>
       </div>
     </div>
   </div>
@@ -115,9 +119,9 @@
 <!-- Certifications -->
 <section id="certs" class="section">
   <div class="container">
-    <h2>Certifications</h2>
-    <ul class="tags">
-      <li>FreeCodeCamp – Responsive Web Design</li>
+    <h2 data-reveal>Certifications</h2>
+    <ul class="tags" data-reveal>
+      <li>freeCodeCamp — Responsive Web Design</li>
     </ul>
   </div>
 </section>
@@ -125,12 +129,12 @@
 <!-- Contact -->
 <section id="contact" class="section">
   <div class="container">
-    <h2>Contact</h2>
-    <p class="lead">Feel free to reach out through any of the channels below.</p>
-    <ul class="tags">
+    <h2 data-reveal>Contact</h2>
+    <p class="lead" data-reveal>Open to internships, entry-level roles, and project collaborations in AI/engineering.</p>
+    <ul class="tags" data-reveal>
       <li><a href="mailto:youremail@example.com">Email</a></li>
-      <li><a href="https://linkedin.com/in/YOUR-LINK">LinkedIn</a></li>
-      <li><a href="https://github.com/ThomasCobosBernalDev">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/YOUR-LINK" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/ThomasCobosBernalDev" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
   </div>
 </section>
@@ -138,10 +142,14 @@
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <p>© 2025 Thomas Cobos Bernal. All rights reserved.</p>
+    <p>© <span id="year"></span> Thomas Cobos Bernal. All rights reserved.</p>
   </div>
 </footer>
 
 <script src="script.js"></script>
+<script>
+  // fallback: set year without relying on script.js if needed
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
