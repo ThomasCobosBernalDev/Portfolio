@@ -1,15 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head> 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thomas Cobos Bernal — Portfolio</title>
-  <meta name="description" content="U.S. Marine transitioning into AI engineering. Leadership, operations, and problem-solving—now applied to code, data, and ML.">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Cobos Bernal – Portfolio</title>
+  <meta name="description" content="U.S. Marine transitioning to AI and software development. Portfolio of projects, certifications, and experience.">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="nav">
-    <a class="brand" href="#top">TCB</a>
+
+<!-- Navigation -->
+<header class="nav">
+  <div class="container inner">
+    <a class="brand" href="#top">Thomas Cobos Bernal</a>
     <nav>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
@@ -17,82 +20,128 @@
       <a href="#certs">Certifications</a>
       <a href="#contact" class="btn">Contact</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <h1>U.S. Marine → Aspiring AI Engineer</h1>
-      <p>Leadership, operations, and problem-solving—now applied to code, data, and machine learning.</p>
-      <div class="cta">
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container wrap">
+    <div>
+      <span class="badge">U.S. Marine → Aspiring AI Engineer</span>
+      <h1>Leadership & operations—now applied to code, data, and ML.</h1>
+      <p class="lead">I’m transitioning from the Marine Corps into AI/engineering. I focus on clear communication, fast problem-solving, and building a solid foundation in Python and web technologies.</p>
+      <div class="cta" style="margin-top:16px;">
         <a href="#projects" class="btn primary">View Projects</a>
         <a href="resume.pdf" class="btn" target="_blank" rel="noopener">Download Résumé</a>
       </div>
-    </section>
-
-    <section id="about" class="section">
-      <h2>About</h2>
-      <p>I’m a U.S. Marine transitioning into AI engineering. I’ve led teams, coordinated operations, and solved problems in high-pressure environments, and I’m channeling that discipline into code, data, and ML fundamentals.</p>
-      <p>International & multi-agency experience: joint training in Japan and civil-operations support in Los Angeles. These built cross-cultural collaboration, clear communication, and fast, data-driven decisions.</p>
-      <p>Currently learning Python and web fundamentals while studying algorithms, data analysis, and machine-learning basics.</p>
-      <ul class="tags">
-        <li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
-        <li>Data Analysis</li><li>Problem-Solving</li><li>ML Fundamentals</li>
-      </ul>
-    </section>
-
-    <section id="experience" class="section">
-      <h2>Experience — United States Marine Corps</h2>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Quick Stats</h3>
       <ul class="bullets">
-        <li>Led small-unit operations: mission planning, resource allocation, and execution under pressure.</li>
-        <li>Scout duties: gathered, analyzed, and relayed information to support data-driven decisions.</li>
-        <li>Deployed to Japan for joint training; strengthened cross-cultural coordination.</li>
-        <li>Supported multi-agency operations in Los Angeles (FBI, DHS, ICE, PD, National Guard) protecting critical infrastructure.</li>
-        <li>Community projects with local volunteers in Okinawa; teamwork and service mindset.</li>
-        <li>Certified Combat Marksmanship Coach (MOS 0933); coached performance and safety.</li>
+        <li>Infantry Team Leader • Scout • Marksmanship Coach (MOS 0933)</li>
+        <li>Japan joint training • LA multi-agency support</li>
+        <li>Learning: Python, HTML/CSS/JS, ML fundamentals</li>
       </ul>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section id="projects" class="section">
-      <h2>Projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Web Basics – Cat Photo App</h3>
-          <p>Built semantic HTML and responsive CSS; practiced forms, accessibility, and layout fundamentals.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>Accessibility</span></div>
-        </article>
-        <article class="card">
-          <h3>Python Warm-ups</h3>
-          <p>Small scripts for input/output, control flow, and data structures with focus on clear, readable code.</p>
-          <div class="tags"><span>Python</span><span>Fundamentals</span></div>
-        </article>
-        <article class="card">
-          <h3>ML Notes & Roadmap (Placeholder)</h3>
-          <p>Study notes and mini-notebooks as I learn NumPy, pandas, data cleaning, and model basics.</p>
-          <div class="tags"><span>Data</span><span>ML</span></div>
-        </article>
+<!-- About -->
+<section id="about" class="section">
+  <div class="container">
+    <h2>About</h2>
+    <p class="lead">Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments, then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.</p>
+    <ul class="tags">
+      <li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
+      <li>Data Analysis</li><li>ML Fundamentals</li><li>Problem-Solving</li>
+    </ul>
+
+    <h3 style="margin-top:28px">Personal Gallery</h3>
+    <div class="gallery">
+      <figure>
+        <img src="img/japan.jpg" alt="Joint training in Japan">
+        <figcaption>Japan joint training — international coordination</figcaption>
+      </figure>
+      <figure>
+        <img src="img/la.jpg" alt="Multi-agency operations in Los Angeles">
+        <figcaption>Los Angeles support — multi-agency operations</figcaption>
+      </figure>
+      <figure>
+        <img src="img/volunteer.jpg" alt="Volunteering in Okinawa river cleanup">
+        <figcaption>Okinawa volunteering — community impact</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2>Experience</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>U.S. Marine Corps</h3>
+        <p>Led infantry teams, coordinated operations, trained in marksmanship, and worked in high-pressure environments.</p>
       </div>
-    </section>
+      <div class="card">
+        <h3>International Training</h3>
+        <p>Joint training operations in Japan; coordinated with allied forces to meet mission goals.</p>
+      </div>
+      <div class="card">
+        <h3>Tech Transition</h3>
+        <p>Studying AI engineering and web development, building foundational skills in Python, HTML, CSS, and JavaScript.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="certs" class="section">
-      <h2>Certifications</h2>
-      <ul class="bullets">
-        <li>freeCodeCamp — Responsive Web Design (link to credential)</li>
-        <!-- Add more as you earn them -->
-      </ul>
-    </section>
+<!-- Projects -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>This website — designed and coded to showcase my work, skills, and background.</p>
+      </div>
+      <div class="card">
+        <h3>HTML/CSS Projects</h3>
+        <p>Small front-end practice projects demonstrating layout, styling, and responsive design.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p>Open to internships, entry-level roles, and collaborations in AI/engineering.</p>
-      <p>
-        <a class="btn" href="mailto:youremail@example.com">Email Me</a>
-        <a class="btn" href="https://www.linkedin.com/in/your-link" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/ThomasCobosBernalDev" target="_blank" rel="noopener">GitHub</a>
-      </p>
-    </section>
-  </main>
+<!-- Certifications -->
+<section id="certs" class="section">
+  <div class="container">
+    <h2>Certifications</h2>
+    <ul class="tags">
+      <li>FreeCodeCamp – Responsive Web Design</li>
+    </ul>
+  </div>
+</section>
 
-  <footer class="footer">© <span id="y"></span> Thomas Cobos Bernal</footer>
-  <script src="script.js"></script>
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2>Contact</h2>
+    <p class="lead">Feel free to reach out through any of the channels below.</p>
+    <ul class="tags">
+      <li><a href="mailto:youremail@example.com">Email</a></li>
+      <li><a href="https://linkedin.com/in/YOUR-LINK">LinkedIn</a></li>
+      <li><a href="https://github.com/ThomasCobosBernalDev">GitHub</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 Thomas Cobos Bernal. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
