@@ -2,7 +2,7 @@
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const id=a.getAttribute('href');
-    if(id.length>1){
+    if(id && id.length>1){
       e.preventDefault();
       document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
     }
@@ -11,7 +11,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
 // Reveal-on-scroll using IntersectionObserver
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 if (!prefersReduced && 'IntersectionObserver' in window){
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
@@ -22,11 +21,9 @@ if (!prefersReduced && 'IntersectionObserver' in window){
     });
   }, {threshold: 0.2});
 
-  // Observe anything marked with [data-reveal]
   document.querySelectorAll('[data-reveal]').forEach((el, i)=>{
     el.classList.add('reveal');
-    // tiny stagger
-    el.style.transitionDelay = `${Math.min(i*60, 360)}ms`;
+    el.style.transitionDelay = `${Math.min(i*60, 300)}ms`;
     obs.observe(el);
   });
 }
