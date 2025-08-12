@@ -156,3 +156,34 @@ a{color:var(--text);text-decoration:none}
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1; transform:none; transition:none}
 }
+
+/* ---- Personal tile ---- */
+.personal-tile{
+  position:relative; display:block; border-radius:16px; overflow:hidden;
+  border:1px solid var(--line); box-shadow:0 10px 30px rgba(15,23,42,.08);
+  aspect-ratio: 16 / 9; background:#f3f6ff;
+}
+.personal-tile img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter: blur(1px) brightness(.8);
+  transform: scale(1.02);
+  transition: filter .2s ease, transform .2s ease;
+}
+.personal-tile .overlay{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35));
+  color:#fff; font-weight:800; letter-spacing:.3px; font-size:clamp(18px,3vw,28px);
+  transition: background .2s ease, opacity .2s ease;
+}
+.personal-tile:hover img{ filter:none; transform: scale(1.0); }
+.personal-tile:hover .overlay{ background:rgba(0,0,0,0); }
+
+/* Personal page gallery */
+.pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.pcard{
+  border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
+  box-shadow:0 8px 26px rgba(15,23,42,.06);
+}
+.pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
+.pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
+@media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
