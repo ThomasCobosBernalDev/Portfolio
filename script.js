@@ -9,6 +9,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
+// Mobile menu toggle
+const btn = document.querySelector('.menu-toggle');
+const menu = document.getElementById('site-menu');
+if (btn && menu){
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
+
 // Reveal-on-scroll using IntersectionObserver
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!prefersReduced && 'IntersectionObserver' in window){
