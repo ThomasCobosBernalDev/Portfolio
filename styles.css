@@ -47,3 +47,16 @@ a{color:var(--text);text-decoration:none}
 
 .footer{padding:28px 0;color:var(--muted);text-align:center}
 @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr} }
+
+/* ------- reveal animations ------- */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1; transform:none}
+
+.reveal.fade-left{transform:translateX(-16px)}
+.reveal.fade-right{transform:translateX(16px)}
+
+/* respect accessibility */
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1; transform:none; transition:none}
+}
+
