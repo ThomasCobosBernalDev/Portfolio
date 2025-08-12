@@ -187,3 +187,12 @@ a{color:var(--text);text-decoration:none}
 .pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
 .pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
 @media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
+
+.personal-tile .overlay span{
+  transition: opacity .18s ease, transform .18s ease;
+}
+.personal-tile:hover .overlay span{
+  opacity: 0;
+  transform: translateY(6px);
+}
+
