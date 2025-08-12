@@ -196,3 +196,44 @@ a{color:var(--text);text-decoration:none}
   transform: translateY(6px);
 }
 
+/* --- About > Personal Gallery (no crop, works for portrait images) --- */
+.gallery{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.gallery figure{
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 26px rgba(15,23,42,.06);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery figure img{
+  width: 100%;
+  height: auto;              /* <= no crop */
+  object-fit: contain;       /* <= fit entire portrait */
+  background: #f6f7fb;       /* subtle backdrop for letterboxing */
+  border-radius: 10px;
+  max-height: 520px;         /* protect against super tall images on desktop */
+}
+
+.gallery figure figcaption{
+  margin-top: 10px;
+  text-align: center;
+  color: #586174;
+  font-size: 14px;
+}
+
+/* Mobile: allow a bit more height so tall portraits still fit nicely */
+@media (max-width: 640px){
+  .gallery figure img{
+    max-height: 70vh;
+  }
+}
