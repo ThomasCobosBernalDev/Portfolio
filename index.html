@@ -12,7 +12,10 @@
 <!-- Navigation -->
 <header class="nav">
   <div class="container inner">
-    <a class="brand" href="#top">Thomas Cobos Bernal</a>
+    <a class="brand" href="#top">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span class="brand-text">Thomas Cobos Bernal</span>
+    </a>
     <nav>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
@@ -25,22 +28,26 @@
 
 <!-- Hero -->
 <section class="hero" id="top">
+  <div class="bg-grid"></div>
+  <div class="bg-accent"></div>
   <div class="container wrap">
     <div data-reveal class="fade-left">
       <span class="badge">U.S. Marine → Aspiring AI Engineer</span>
-      <h1>Leadership & operations—now applied to code, data, and ML.</h1>
-      <p class="lead">I’m transitioning from the Marine Corps into AI/engineering. I focus on clear communication, fast problem-solving, and building a solid foundation in Python and web technologies.</p>
-      <div class="cta" style="margin-top:16px;">
+      <h1>Leadership & operations—now applied to <span class="hl">code</span>, <span class="hl">data</span>, and <span class="hl">ML</span>.</h1>
+      <p class="lead">Transitioning from the Marine Corps into AI/engineering. Clear communication, fast problem-solving, and a growing foundation in Python and web technologies.</p>
+      <div class="cta">
         <a href="#projects" class="btn primary">View Projects</a>
         <a href="resume.pdf" class="btn" target="_blank" rel="noopener">Download Résumé</a>
       </div>
+      <div class="meta-line"><span class="dot"></span> Houston, TX • Open to AI/Engineering roles</div>
     </div>
-    <div class="card" data-reveal>
-      <h3 style="margin-top:0">Quick Stats</h3>
-      <ul class="bullets">
-        <li>Infantry Team Leader • Scout • Marksmanship Coach (MOS 0933)</li>
-        <li>Japan joint training • LA multi-agency support</li>
-        <li>Learning: Python, HTML/CSS/JS, ML fundamentals</li>
+    <div class="card stats" data-reveal>
+      <h3 class="card-title">Quick Stats</h3>
+      <ul class="stat-list">
+        <li><span class="stat-k">3</span><span class="stat-label">years leadership</span></li>
+        <li><span class="stat-k">2</span><span class="stat-label">deployments (JP / LA)</span></li>
+        <li><span class="stat-k">0933</span><span class="stat-label">Marksmanship Coach</span></li>
+        <li><span class="stat-k">Now</span><span class="stat-label">Python • HTML/CSS/JS • ML</span></li>
       </ul>
     </div>
   </div>
@@ -51,12 +58,13 @@
   <div class="container">
     <h2 data-reveal>About</h2>
     <p class="lead" data-reveal>Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments, then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.</p>
+
     <ul class="tags" data-reveal>
       <li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
       <li>Data Analysis</li><li>ML Fundamentals</li><li>Problem-Solving</li>
     </ul>
 
-    <h3 style="margin-top:28px" data-reveal>Personal Gallery</h3>
+    <h3 class="subheading" data-reveal>Personal Gallery</h3>
     <div class="gallery">
       <figure data-reveal class="fade-right">
         <img src="img/japan.jpg" alt="Joint training in Japan">
@@ -103,14 +111,17 @@
       <div class="card" data-reveal>
         <h3>Portfolio Website</h3>
         <p>This website — designed and coded to showcase my work, skills, and background.</p>
+        <div class="tags small"><span>HTML</span><span>CSS</span><span>Accessibility</span></div>
       </div>
       <div class="card" data-reveal>
         <h3>HTML/CSS Projects</h3>
         <p>Small front-end practice projects demonstrating layout, styling, and responsive design.</p>
+        <div class="tags small"><span>Flexbox</span><span>Grid</span><span>Responsive</span></div>
       </div>
       <div class="card" data-reveal>
         <h3>Python Warm-ups</h3>
         <p>Short scripts covering I/O, control flow, and data structures with an emphasis on readable code.</p>
+        <div class="tags small"><span>Python</span><span>CLI</span><span>Basics</span></div>
       </div>
     </div>
   </div>
@@ -131,7 +142,7 @@
   <div class="container">
     <h2 data-reveal>Contact</h2>
     <p class="lead" data-reveal>Open to internships, entry-level roles, and project collaborations in AI/engineering.</p>
-    <ul class="tags" data-reveal>
+    <ul class="tags links" data-reveal>
       <li><a href="mailto:youremail@example.com">Email</a></li>
       <li><a href="https://linkedin.com/in/YOUR-LINK" target="_blank" rel="noopener">LinkedIn</a></li>
       <li><a href="https://github.com/ThomasCobosBernalDev" target="_blank" rel="noopener">GitHub</a></li>
@@ -147,9 +158,6 @@
 </footer>
 
 <script src="script.js"></script>
-<script>
-  // fallback: set year without relying on script.js if needed
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
