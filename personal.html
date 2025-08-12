@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal – Thomas Cobos Bernal</title>
+  <meta name="description" content="Personal gallery and family photos.">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container inner">
+    <a class="brand" href="index.html#top"><span class="brand-text">Thomas Cobos Bernal</span></a>
+    <nav class="menu">
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#certs">Certifications</a>
+      <a href="index.html#contact" class="btn">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" id="personal">
+  <div class="container">
+    <h1 style="margin:0 0 4px">Personal</h1>
+    <p class="lead">A few family photos and personal moments. (The main site stays focused on work.)</p>
+
+    <div class="pgrid" style="margin-top:18px">
+      <!-- Replace image paths/captions with yours -->
+      <figure class="pcard">
+        <img src="img/personal/family-1.jpg" alt="Family at the park">
+        <figcaption>Family day at the park.</figcaption>
+      </figure>
+      <figure class="pcard">
+        <img src="img/personal/japan-1.jpg" alt="In Japan">
+        <figcaption>Japan — off-duty moment.</figcaption>
+      </figure>
+      <figure class="pcard">
+        <img src="img/personal/volunteer-1.jpg" alt="Volunteering">
+        <figcaption>Volunteering, river cleanup.</figcaption>
+      </figure>
+      <!-- add more figures as needed -->
+    </div>
+
+    <p style="margin-top:22px">
+      <a class="btn" href="index.html#personal-tile">← Back to Portfolio</a>
+    </p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> Thomas Cobos Bernal. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
