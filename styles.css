@@ -237,3 +237,12 @@ a{color:var(--text);text-decoration:none}
     max-height: 70vh;
   }
 }
+
+@media (min-width: 1024px) {
+  .personal-tile img {
+    max-width: 90%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
