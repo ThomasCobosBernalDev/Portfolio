@@ -263,11 +263,15 @@ a{color:var(--text);text-decoration:none}
 .pcard img{width:100%;height:240px;object-fit:cover;display:block}
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
-/* Phone: 3-up like index gallery */
+/* Phone: make personal page cards wider (2-up), then 1-up on very small screens */
 @media (max-width:700px){
-  .pgrid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .pcard img{height:150px}
-  .pcard figcaption{font-size:12px}
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .pcard img{height:180px}
+  .pcard figcaption{font-size:13px;text-align:center}
+}
+@media (max-width:420px){
+  .pgrid{grid-template-columns:1fr}
+  .pcard img{height:auto;max-height:260px;object-fit:cover}
 }
 
 /* ===============================
@@ -336,4 +340,3 @@ a{color:var(--text);text-decoration:none}
 #about .tags{
   justify-content: flex-start !important;  /* chips left with the text */
 }
-
