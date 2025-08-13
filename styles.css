@@ -129,17 +129,51 @@ a{color:var(--text);text-decoration:none}
 .bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
 /* gallery */
-.gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:16px}
-.gallery figure{margin:0}
-.gallery img{
-  width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--line);
-  box-shadow:0 8px 28px rgba(15,23,42,.06);display:block
+.gallery{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-content: center;        /* Center grid items */
 }
-.gallery figcaption{font-size:12px;color:#586174;margin-top:6px}
-
-/* Force single-column gallery on phones so images align straight down */
-@media (max-width:700px){
-  .gallery{grid-template-columns:1fr}
+@media (min-width: 768px){
+  .gallery{
+    gap: 28px;                    /* more space on desktop */
+    justify-content: center;      /* keep centered on wide screens */
+    max-width: 1100px;            /* prevent stretching too far */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.gallery figure{
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 26px rgba(15,23,42,.06);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery figure img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f6f7fb;
+  border-radius: 10px;
+  max-height: 520px;
+}
+.gallery figure figcaption{
+  margin-top: 10px;
+  text-align: center;
+  color: #586174;
+  font-size: 14px;
+}
+@media (max-width: 700px){
+  .gallery{grid-template-columns: 1fr;}
+}
+@media (max-width: 640px){
+  .gallery figure img{max-height: 70vh;}
 }
 
 /* footer */
@@ -177,8 +211,6 @@ a{color:var(--text);text-decoration:none}
 }
 .personal-tile:hover img{ filter:none; transform: scale(1.0); }
 .personal-tile:hover .overlay{ background:rgba(0,0,0,0); }
-
-/* Personal page gallery */
 .pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
 .pcard{
   border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
@@ -187,7 +219,6 @@ a{color:var(--text);text-decoration:none}
 .pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
 .pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
 @media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
-
 .personal-tile .overlay span{
   transition: opacity .18s ease, transform .18s ease;
 }
@@ -195,49 +226,6 @@ a{color:var(--text);text-decoration:none}
   opacity: 0;
   transform: translateY(6px);
 }
-
-/* --- About > Personal Gallery (no crop, works for portrait images) --- */
-.gallery{
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.gallery figure{
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 8px 26px rgba(15,23,42,.06);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.gallery figure img{
-  width: 100%;
-  height: auto;              /* <= no crop */
-  object-fit: contain;       /* <= fit entire portrait */
-  background: #f6f7fb;       /* subtle backdrop for letterboxing */
-  border-radius: 10px;
-  max-height: 520px;         /* protect against super tall images on desktop */
-}
-
-.gallery figure figcaption{
-  margin-top: 10px;
-  text-align: center;
-  color: #586174;
-  font-size: 14px;
-}
-
-/* Mobile: allow a bit more height so tall portraits still fit nicely */
-@media (max-width: 640px){
-  .gallery figure img{
-    max-height: 70vh;
-  }
-}
-
 @media (min-width: 1024px) {
   .personal-tile img {
     max-width: 90%;
@@ -245,4 +233,3 @@ a{color:var(--text);text-decoration:none}
     margin: 0 auto;
   }
 }
-
