@@ -20,10 +20,37 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const menuBtn  = document.querySelector('.menu-toggle');
 const siteMenu = document.getElementById('site-menu');
 
+function closeMenu() {
+  if (!siteMenu) return;
+  if (siteMenu.classList.contains('open')) {
+    siteMenu.classList.remove('open');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+  }
+}
+
 if (menuBtn && siteMenu) {
-  menuBtn.addEventListener('click', () => {
+  // open/close on button
+  menuBtn.addEventListener('click', (e) => {
     const open = siteMenu.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    e.stopPropagation();
+  });
+
+  // close when clicking a menu link
+  siteMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => closeMenu());
+  });
+
+  // close when clicking outside the menu/toggle
+  document.addEventListener('click', (e) => {
+    const clickInsideMenu  = siteMenu.contains(e.target);
+    const clickOnToggle    = menuBtn.contains(e.target);
+    if (!clickInsideMenu && !clickOnToggle) closeMenu();
+  });
+
+  // close on Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
@@ -68,9 +95,7 @@ if (!prefersReduced && 'IntersectionObserver' in window) {
 
   function setLabel(isDark){
     if (!label) return;
-    // Show current mode text (you liked this behavior):
-    label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
-    // If you ever want it to show the ACTION instead, flip the strings above.
+    label.textContent = isDark ? 'Dark Mode' : 'Light Mode'; // shows current mode
   }
 
   function applyTheme(theme, persist = true){
@@ -95,7 +120,7 @@ if (!prefersReduced && 'IntersectionObserver' in window) {
 
   // Toggle click
   toggle?.addEventListener('click', () => {
-    const nowDark = !root.classList.contains('theme-dark') ? true : false;
+    const nowDark = !root.classList.contains('theme-dark');
     applyTheme(nowDark ? 'dark' : 'light', true);
   });
 
