@@ -4,26 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas Cobos Bernal – Portfolio</title>
-  <meta name="description" content="U.S. Marine transitioning to AI and software development. Portfolio of projects, certifications, and experience.">
+  <meta name="description" content="U.S. Marine transitioning into AI/engineering. Portfolio, experience, and projects." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 </head>
 <body>
 
-<!-- Navigation -->
+<!-- ===== NAV ===== -->
 <header class="nav">
   <div class="container inner">
-    <a class="brand" href="#top">
-      <span class="brand-text">Thomas Cobos Bernal</span>
-    </a>
+    <a class="brand" href="#top"><span class="brand-text">Thomas Cobos Bernal</span></a>
 
-    <!-- THEME TOGGLE -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    <!-- Actions group: toggle (left of burger on mobile), burger, menu -->
+    <div class="nav-actions">
+      <!-- Dark mode toggle -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="toggle-rail"><span class="toggle-thumb"></span></span>
+        <span class="toggle-label">Dark Mode</span>
+      </button>
 
-    <!-- mobile menu toggle -->
-    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
-      <span class="menu-bars"></span>
-    </button>
+      <!-- Hamburger -->
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
+        <span class="menu-bars"></span>
+      </button>
+    </div>
 
     <nav id="site-menu" class="menu">
       <a href="#about">About</a>
@@ -35,44 +39,38 @@
   </div>
 </header>
 
-<!-- Hero -->
+<!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="bg-grid"></div>
   <div class="bg-accent"></div>
+
   <div class="container wrap">
-    <div class="hero-copy" data-reveal>
+    <div data-reveal class="fade-left">
       <span class="badge">U.S. Marine → Aspiring AI Engineer</span>
-
-      <h1>
-        From Marine Corps precision to AI innovation — delivering results in
-        <span class="hl">Python</span>, <span class="hl">ML</span>, and
-        <span class="hl">full-stack development</span>.
+      <h1 class="hero-title">
+        Leadership & operations—now applied to
+        <span class="hl">code</span>, <span class="hl">data</span>, and <span class="hl">ML</span>.
       </h1>
-
       <p class="lead">
-        U.S. Marine transitioning into AI/engineering with proven leadership under pressure,
-        strong problem-solving skills, and a solid foundation in Python, HTML/CSS/JS, and machine learning.
-        Committed to building efficient, impactful tech solutions.
+        Transitioning from the Marine Corps into AI/engineering. Clear communication, fast problem-solving,
+        and a growing foundation in Python and web technologies.
       </p>
-
       <div class="cta">
         <a href="#projects" class="btn primary">View Projects</a>
       </div>
-
       <div class="meta-line"><span class="dot"></span> Houston, TX • Open to AI/Engineering roles</div>
     </div>
   </div>
 </section>
 
-<!-- About -->
+<!-- ===== ABOUT ===== -->
 <section id="about" class="section">
   <div class="container">
     <h2 data-reveal>About</h2>
     <p class="lead" data-reveal>
-      Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure
-      environments, then brought those habits to coding and ML fundamentals. International work in
-      Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast,
-      data-driven decisions.
+      Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments,
+      then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency
+      support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.
     </p>
 
     <ul class="tags" data-reveal>
@@ -81,24 +79,28 @@
     </ul>
 
     <h3 class="subheading" data-reveal>Personal Gallery</h3>
+
+    <!-- portrait-friendly gallery -->
     <div class="gallery">
       <figure data-reveal class="fade-right">
-        <img src="images/IMG_4699.jpg YEs HAT.jpg" alt="Japan joint training — international coordination">
+        <img src="images/IMG_4699.jpg YEs HAT.jpg" alt="Joint training in Japan" />
         <figcaption>Japan joint training — international coordination</figcaption>
       </figure>
+
       <figure data-reveal>
-        <img src="images/port.jpg" alt="Los Angeles support — multi-agency operations">
+        <img src="images/port.jpg" alt="Multi-agency operations in Los Angeles" />
         <figcaption>Los Angeles support — multi-agency operations</figcaption>
       </figure>
+
       <figure data-reveal class="fade-left">
-        <img src="images/IMG_0396.jpg YES.jpg" alt="Combat marksmanship coaching — full kit">
+        <img src="images/IMG_0396.jpg YES.jpg" alt="Combat marksmanship coaching in full kit" />
         <figcaption>Combat marksmanship coaching — full kit</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- Experience -->
+<!-- ===== EXPERIENCE ===== -->
 <section id="experience" class="section">
   <div class="container">
     <h2 data-reveal>Experience</h2>
@@ -119,7 +121,7 @@
   </div>
 </section>
 
-<!-- Projects -->
+<!-- ===== PROJECTS ===== -->
 <section id="projects" class="section">
   <div class="container">
     <h2 data-reveal>Projects</h2>
@@ -136,14 +138,14 @@
       </div>
       <div class="card" data-reveal>
         <h3>Python Warm-ups</h3>
-        <p>Short scripts covering I/O, control flow, and data structures with an emphasis on readable code.</p>
+        <p>Short scripts covering I/O, control flow, and data structures focused on readable code.</p>
         <div class="tags small"><span>Python</span><span>CLI</span><span>Basics</span></div>
       </div>
     </div>
   </div>
-</section> 
+</section>
 
-<!-- Certifications -->
+<!-- ===== CERTS ===== -->
 <section id="certs" class="section">
   <div class="container">
     <h2 data-reveal>Certifications</h2>
@@ -151,9 +153,9 @@
       <li>freeCodeCamp — Responsive Web Design</li>
     </ul>
   </div>
-</section> 
+</section>
 
-<!-- Personal tile (link to separate page) -->
+<!-- ===== PERSONAL TILE ===== -->
 <section class="section" id="personal-tile">
   <div class="container">
     <h2 data-reveal>Personal</h2>
@@ -163,12 +165,11 @@
       <div class="overlay"><span>Personal</span></div>
     </a>
 
-    <!-- Centered caption -->
-    <p class="tile-caption" style="margin-top:12px">Click to view family photos and personal moments.</p>
+    <p class="tile-caption">Click to view family photos and personal moments.</p>
   </div>
 </section>
 
-<!-- Contact -->
+<!-- ===== CONTACT ===== -->
 <section id="contact" class="section">
   <div class="container">
     <h2 data-reveal>Contact</h2>
@@ -181,7 +182,7 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="container">
     <p>© <span id="year"></span> Thomas Cobos Bernal. All rights reserved.</p>
