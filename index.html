@@ -6,8 +6,8 @@
   <title>Thomas Cobos Bernal – Portfolio</title>
   <meta name="description" content="U.S. Marine transitioning to AI and software development. Portfolio of projects, certifications, and experience.">
   <link rel="stylesheet" href="styles.css" />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.ico">
+  <!-- Optional favicon: place your favicon file at /images/favicon.png and uncomment below -->
+  <!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
 </head>
 <body>
 
@@ -38,23 +38,26 @@
   <div class="bg-grid"></div>
   <div class="bg-accent"></div>
   <div class="container wrap">
-    <div data-reveal class="fade-left">
+    <div class="hero-copy" data-reveal>
       <span class="badge">U.S. Marine → Aspiring AI Engineer</span>
-      <h1>Leadership & operations—now applied to <span class="hl">code</span>, <span class="hl">data</span>, and <span class="hl">ML</span>.</h1>
-      <p class="lead">Transitioning from the Marine Corps into AI/engineering. Clear communication, fast problem-solving, and a growing foundation in Python and web technologies.</p>
+
+      <h1>
+        From Marine Corps precision to AI innovation — delivering results in
+        <span class="hl">Python</span>, <span class="hl">ML</span>, and
+        <span class="hl">full-stack development</span>.
+      </h1>
+
+      <p class="lead">
+        Veteran U.S. Marine transitioning into AI/engineering with proven leadership under pressure,
+        strong problem-solving skills, and a solid foundation in Python, HTML/CSS/JS, and machine
+        learning. Committed to building efficient, impactful tech solutions.
+      </p>
+
       <div class="cta">
         <a href="#projects" class="btn primary">View Projects</a>
       </div>
-      <div class="meta-line"><span class="dot"></span> Houston, TX • Open to AI/Engineering roles</div>
-    </div>
 
-    <div class="card stats" data-reveal>
-      <h3 class="card-title">Quick Stats</h3>
-      <ul class="stat-list">
-        <li><span class="stat-k">3</span><span class="stat-label">years leadership</span></li>
-        <li><span class="stat-k">2</span><span class="stat-label">deployments (JP / LA)</span></li>
-        <li><span class="stat-k">Now</span><span class="stat-label">Python • HTML/CSS/JS • ML</span></li>
-      </ul>
+      <div class="meta-line"><span class="dot"></span> Houston, TX • Open to AI/Engineering roles</div>
     </div>
   </div>
 </section>
@@ -63,7 +66,12 @@
 <section id="about" class="section">
   <div class="container">
     <h2 data-reveal>About</h2>
-    <p class="lead" data-reveal>Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure environments, then brought those habits to coding and ML fundamentals. International work in Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast, data-driven decisions.</p>
+    <p class="lead" data-reveal>
+      Born in Ecuador, raised in Houston. I led teams and coordinated operations in high-pressure
+      environments, then brought those habits to coding and ML fundamentals. International work in
+      Japan and multi-agency support in Los Angeles taught me cross-cultural collaboration and fast,
+      data-driven decisions.
+    </p>
 
     <ul class="tags" data-reveal>
       <li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
@@ -71,17 +79,21 @@
     </ul>
 
     <h3 class="subheading" data-reveal>Personal Gallery</h3>
+
+    <!-- Portrait-friendly gallery -->
     <div class="gallery">
       <figure data-reveal class="fade-right">
-        <img src="images/IMG_4699.jpg YEs HAT.jpg" alt="Joint training in Japan">
+        <img src="images/IMG_4699.jpg YEs HAT.jpg" alt="Japan joint training — international coordination">
         <figcaption>Japan joint training — international coordination</figcaption>
       </figure>
+
       <figure data-reveal>
-        <img src="images/port.jpg" alt="Multi-agency operations in Los Angeles">
+        <img src="images/port.jpg" alt="Los Angeles support — multi-agency operations">
         <figcaption>Los Angeles support — multi-agency operations</figcaption>
       </figure>
+
       <figure data-reveal class="fade-left">
-        <img src="images/IMG_0396.jpg YES.jpg" alt="Coaching in full kit with pistol and rifle">
+        <img src="images/IMG_0396.jpg YES.jpg" alt="Combat marksmanship coaching — full kit">
         <figcaption>Combat marksmanship coaching — full kit</figcaption>
       </figure>
     </div>
@@ -97,11 +109,11 @@
         <h3>U.S. Marine Corps</h3>
         <p>Led infantry teams, coordinated operations, trained in marksmanship, and worked in high-pressure environments.</p>
       </div>
-      <div class="card" data-reveal class="fade-right">
+      <div class="card" data-reveal>
         <h3>International Training</h3>
         <p>Joint training operations in Japan; coordinated with allied forces to meet mission goals.</p>
       </div>
-      <div class="card" data-reveal class="fade-left">
+      <div class="card" data-reveal>
         <h3>Tech Transition</h3>
         <p>Studying AI engineering and web development, building foundational skills in Python, HTML, CSS, and JavaScript.</p>
       </div>
@@ -131,7 +143,7 @@
       </div>
     </div>
   </div>
-</section> 
+</section>
 
 <!-- Certifications -->
 <section id="certs" class="section">
@@ -141,19 +153,19 @@
       <li>freeCodeCamp — Responsive Web Design</li>
     </ul>
   </div>
-</section> 
+</section>
 
-<!-- Personal tile -->
+<!-- Personal tile (link to separate page) -->
 <section class="section" id="personal-tile">
   <div class="container">
     <h2 data-reveal>Personal</h2>
+
     <a class="personal-tile" href="personal.html">
       <img src="images/IMG_6919.heic_2.jpg" alt="Family / personal gallery cover" />
-      <div class="overlay">
-        <span>Personal</span>
-      </div>
+      <div class="overlay"><span>Personal</span></div>
     </a>
-    <p class="lead" style="margin-top:12px">Click to get to know me.</p>
+
+    <p class="lead" style="margin-top:12px">Click to view family photos and personal moments.</p>
   </div>
 </section>
 
@@ -179,6 +191,5 @@
 
 <script src="script.js"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-
 </body>
 </html>
