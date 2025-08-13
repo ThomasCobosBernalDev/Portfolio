@@ -135,7 +135,7 @@ a{color:var(--text);text-decoration:none}
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  justify-content: center;        /* center cards */
+  justify-content: center;
 }
 @media (min-width: 768px){
   .gallery{
@@ -213,16 +213,6 @@ a{color:var(--text);text-decoration:none}
     margin: 0 auto;
   }
 }
-
-/* Personal page gallery (if you use personal.html) */
-.pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
-.pcard{
-  border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
-  box-shadow:0 8px 26px rgba(15,23,42,.06);
-}
-.pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
-.pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
-@media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
 
 /* footer */
 .footer{padding:28px 0;color:#6b7384;text-align:center}
