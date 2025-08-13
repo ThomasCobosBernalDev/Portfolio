@@ -6,8 +6,8 @@
   <title>Personal – Thomas Cobos Bernal</title>
   <meta name="description" content="Personal gallery and family photos.">
   <link rel="stylesheet" href="styles.css" />
-  <!-- Optional favicon: place your file at /images/favicon.png or adjust path -->
-  <link rel="icon" type="image/png" href="images/favicon.ico">
+  <!-- Favicon (ICO) -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 </head>
 <body>
 
@@ -17,6 +17,9 @@
     <a class="brand" href="index.html#top">
       <span class="brand-text">Thomas Cobos Bernal</span>
     </a>
+
+    <!-- THEME TOGGLE -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
 
     <!-- mobile menu toggle -->
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
@@ -76,7 +79,7 @@
   </div>
 </footer>
 
-<!-- Reuse the same JS so the mobile menu works here too -->
+<!-- Reuse the same JS so the mobile menu + theme toggle work here too -->
 <script src="script.js"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
