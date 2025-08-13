@@ -1,37 +1,16 @@
-/* ---------- theme (light) ---------- */
+/* ---------- theme ---------- */
 :root{
   --bg: #f6f8fc;
   --panel:#ffffff;
   --text:#0b1220;
   --muted:#4b5567;
   --line:#e5e9f2;
-  --accent:#2563eb;      /* blue */
-  --accent-2:#06b6d4;    /* cyan */
+  --accent:#2563eb;
+  --accent-2:#06b6d4;
   --container: 1180px;
   --radius: 16px;
-
-  /* chip defaults (used by cert link) */
-  --chip-bg:#f0f4ff;
-  --chip-border:#c7d6ff;
-  --chip-text:#1d3a8a;
 }
 
-/* ---------- theme (dark) ---------- */
-.theme-dark{
-  --bg:#0e1116;
-  --panel:#121722;
-  --text:#e6ebf5;
-  --muted:#a4aec3;
-  --line:#20283a;
-  --accent:#3b82f6;
-  --accent-2:#22d3ee;
-
-  --chip-bg:#172444;
-  --chip-border:#223560;
-  --chip-text:#b1c9ff;
-}
-
-/* base */
 *{box-sizing:border-box}
 html,body{
   margin:0;background:var(--bg);color:var(--text);
@@ -44,39 +23,26 @@ a{color:var(--text);text-decoration:none}
 .nav{
   position:sticky;top:0;z-index:100;
   background:rgba(255,255,255,.95);
-  border-bottom:1px solid var(--line);
   backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.theme-dark .nav{ background:rgba(14,17,22,.85); }
-.nav .inner{
-  display:flex;align-items:center;gap:16px; padding:14px 0;
-  flex-wrap:nowrap; /* prevent brand from wrapping */
-}
-.brand{flex:0 1 auto;min-width:0}
-.brand-text{
-  font-weight:900;letter-spacing:.2px;
-  font-size: clamp(16px, 3.2vw, 24px);
-  white-space:nowrap;            /* keep name on one line */
-  overflow:hidden;text-overflow:ellipsis;
-}
-.menu{display:flex;align-items:center;gap:16px;margin-left:auto}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand-text{font-weight:900;letter-spacing:.3px;font-size: clamp(18px, 3vw, 24px)}
+
+/* desktop menu */
+.menu{display:flex;align-items:center;gap:16px}
 .menu a{padding:8px 10px;border-radius:10px}
 .menu a.btn{border:1px solid var(--line)}
-
-/* nav actions (toggle + burger) */
-.nav-actions{
-  display:flex;align-items:center;gap:12px;margin-left:auto;
-}
 
 /* hamburger */
 .menu-toggle{
   display:none;position:relative;width:42px;height:38px;border:1px solid var(--line);
-  border-radius:10px;background:var(--panel)
+  border-radius:10px;background:#fff
 }
 .menu-toggle .menu-bars,
 .menu-toggle .menu-bars:before,
 .menu-toggle .menu-bars:after{
-  content:"";position:absolute;left:10px;right:10px;height:2px;background:var(--text);border-radius:2px
+  content:"";position:absolute;left:10px;right:10px;height:2px;background:#111;border-radius:2px
 }
 .menu-toggle .menu-bars{top:50%;transform:translateY(-50%)}
 .menu-toggle .menu-bars:before{top:-8px}
@@ -87,48 +53,19 @@ a{color:var(--text);text-decoration:none}
   .menu-toggle{display:block}
   .menu{
     position:absolute;right:24px;top:100%;display:none;flex-direction:column;align-items:flex-start;
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;gap:8px;
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;gap:8px;
     box-shadow:0 12px 30px rgba(15,23,42,.12)
   }
   .menu.open{display:flex}
-  .nav-actions{margin-left:auto}
-}
-
-/* ---------- Dark mode toggle (no emoji, dynamic label) ---------- */
-.theme-toggle{
-  display:flex;align-items:center;gap:10px;
-  background:transparent;border:none;color:var(--text);cursor:pointer;padding:4px 6px;
-  border-radius:12px;
-}
-.theme-toggle .toggle-rail{
-  width:52px;height:28px;border-radius:999px;background:var(--accent);position:relative;
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);
-  flex:0 0 52px; /* fixes overflow illusions */
-}
-.theme-toggle .toggle-thumb{
-  position:absolute;top:50%;left:4px;transform:translateY(-50%);
-  width:20px;height:20px;border-radius:999px;background:#fff;transition:left .18s ease;
-  box-shadow:0 2px 6px rgba(0,0,0,.25);
-}
-.theme-toggle[aria-pressed="true"] .toggle-thumb{ left:28px; }
-.theme-toggle .toggle-label{
-  font-weight:600;white-space:nowrap;line-height:1;
-}
-
-/* tighten label on tiny phones rather than wrapping brand */
-@media (max-width:420px){
-  .brand-text{font-size:15px}
-  .theme-toggle .toggle-label{font-size:14px}
 }
 
 /* ---------- buttons ---------- */
 .btn{
   display:inline-block;border:1px solid var(--line);
-  padding:10px 16px;border-radius:12px;background:transparent;color:var(--text);
+  padding:10px 16px;border-radius:12px;
   transition:.15s background,.15s transform,.15s border-color
 }
-.btn:hover{transform:translateY(-1px);background:rgba(0,0,0,.03);border-color:#cfd8e5}
-.theme-dark .btn:hover{background:rgba(255,255,255,.05);border-color:#2a3550}
+.btn:hover{transform:translateY(-1px);background:#f1f5f9;border-color:#cfd8e5}
 .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 .btn.primary:hover{filter:brightness(1.05)}
 
@@ -141,38 +78,42 @@ a{color:var(--text);text-decoration:none}
     linear-gradient(90deg, #e9eef8 1px, transparent 1px);
   background-size: 28px 28px;
 }
-.theme-dark .bg-grid{
-  background-image:
-    linear-gradient(#1b2334 1px, transparent 1px),
-    linear-gradient(90deg, #1b2334 1px, transparent 1px);
-}
 .bg-accent{
   position:absolute;right:-140px;top:-140px;width:420px;height:420px;
   background: radial-gradient(closest-side at 30% 30%, rgba(37,99,235,.18), transparent 70%),
               radial-gradient(closest-side at 70% 70%, rgba(6,182,212,.18), transparent 70%);
   filter: blur(20px);
 }
-.hero .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
-.hero-title{font-size:clamp(38px,7vw,68px);margin:6px 0 12px}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.hero h1{font-size:clamp(32px,5vw,50px);margin:6px 0 12px}
 .hl{background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .badge{
   display:inline-block;background:#e8f0ff;color:#1d4ed8;border:1px solid #cfe0ff;
   padding:4px 10px;border-radius:999px;font-size:12px;margin-bottom:12px
 }
-.theme-dark .badge{background:#182544;color:#8ab4ff;border-color:#1f2f54}
 .lead{color:var(--muted);max-width:780px}
 .cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
 .meta-line{margin-top:12px;color:#6b7384;font-size:14px;display:flex;align-items:center;gap:8px}
 .meta-line .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
 
-/* cards / grids */
+/* quick stats card */
 .card{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:18px;box-shadow:0 8px 28px rgba(15,23,42,.06)
 }
+.card-title{margin:0 0 12px}
+.stats .stat-list{
+  list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px
+}
+.stat-k{display:block;font-weight:800;font-size:20px;line-height:1;color:var(--accent)}
+.stat-label{display:block;color:#647089;font-size:13px}
+
+/* ---------- sections ---------- */
 .section{padding:72px 0;border-top:1px solid var(--line)}
 .section h2{font-size:28px;margin:0 0 12px}
 .subheading{margin-top:28px}
+
+/* cards/grid */
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px}
 .card:hover{transform:translateY(-2px);transition:transform .15s}
 
@@ -181,54 +122,59 @@ a{color:var(--text);text-decoration:none}
   list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:10px
 }
 .tags li, .tags span{
-  background:var(--chip-bg);color:var(--chip-text);padding:7px 12px;border-radius:999px;
-  font-size:14px;border:1px solid var(--chip-border);box-shadow:0 1px 0 rgba(13, 42, 148, .08)
+  background:#f0f4ff;color:#1d3a8a;padding:7px 12px;border-radius:999px;
+  font-size:14px;border:1px solid #c7d6ff;box-shadow:0 1px 0 rgba(13, 42, 148, .08)
 }
 .tags.small span{font-size:12px;padding:5px 10px}
-
-/* clickable chip for cert link */
-.tags a.chip{
-  display:inline-block;
-  background: var(--chip-bg);
-  color: var(--chip-text);
-  padding: 7px 12px;
-  border-radius: 999px;
-  font-size: 14px;
-  border: 1px solid var(--chip-border);
-  box-shadow: 0 1px 0 rgba(13, 42, 148, .08);
-  transition: transform .15s ease, background .15s ease, border-color .15s ease;
-  text-decoration: none;
-  line-height: 1.2;
-}
-.tags a.chip:hover{ transform: translateY(-1px); text-decoration:none; }
-.tags a.chip:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-
 .bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
-/* ===== gallery (portrait-friendly) ===== */
+/* -------- Personal Gallery (About) -------- */
 .gallery{
-  display:grid;gap:24px;               /* more space on desktop */
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  margin-top:16px;
+  /* ensure a little inner padding so cards don't kiss the edge on narrow screens */
+  padding:0 2px;
 }
 .gallery figure{
-  margin:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);
-  box-shadow:0 8px 26px rgba(15,23,42,.06);padding:12px;display:flex;flex-direction:column;align-items:center
+  margin:0;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 8px 26px rgba(15,23,42,.06);
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .gallery figure img{
-  width:100%;height:auto;object-fit:contain;background:#f6f7fb;border-radius:10px;max-height:520px
+  width:100%;
+  height:auto;              /* default: no crop on wider screens */
+  object-fit:contain;
+  background:#f6f7fb;
+  border-radius:10px;
+  max-height:520px;
 }
-.theme-dark .gallery figure img{background:#0f1524}
-.gallery figure figcaption{margin-top:10px;text-align:center;color:#586174;font-size:14px}
+.gallery figure figcaption{
+  margin-top:10px;
+  text-align:center;
+  color:#586174;
+  font-size:14px;
+}
 
-/* ===== Personal tile ===== */
+/* -------- Personal tile -------- */
 .personal-tile{
   position:relative; display:block; border-radius:16px; overflow:hidden;
   border:1px solid var(--line); box-shadow:0 10px 30px rgba(15,23,42,.08);
   aspect-ratio: 16 / 9; background:#f3f6ff;
 }
-.theme-dark .personal-tile{background:#10182a}
-.personal-tile img{ width:100%; height:100%; object-fit:cover; display:block;
-  filter: blur(1px) brightness(.8); transform: scale(1.02); transition: filter .2s, transform .2s; }
+.personal-tile img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter: blur(1px) brightness(.8);
+  transform: scale(1.02);
+  transition: filter .2s ease, transform .2s ease;
+}
 .personal-tile .overlay{
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
   background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35));
@@ -237,43 +183,78 @@ a{color:var(--text);text-decoration:none}
 }
 .personal-tile:hover img{ filter:none; transform: scale(1.0); }
 .personal-tile:hover .overlay{ background:rgba(0,0,0,0); }
-.personal-tile .overlay span{ transition: opacity .18s ease, transform .18s ease; }
-.personal-tile:hover .overlay span{ opacity:0; transform: translateY(6px); }
-.tile-caption{ text-align:center; color:var(--muted); margin-top:12px }
 
-/* ===== Personal page cards ===== */
+.personal-tile .overlay span{
+  transition: opacity .18s ease, transform .18s ease;
+}
+.personal-tile:hover .overlay span{
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* shrink the tile image a bit on desktop so it doesn’t dominate */
+@media (min-width:1024px){
+  .personal-tile img{
+    max-width:90%;
+    display:block;
+    margin:0 auto;
+  }
+}
+
+/* -------- Personal page gallery -------- */
 .pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
-.pcard{ border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel);
-  box-shadow:0 8px 26px rgba(15,23,42,.06); }
+.pcard{
+  border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
+  box-shadow:0 8px 26px rgba(15,23,42,.06);
+}
 .pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
 .pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
-
-/* ===== Mobile layouts (3-up grids) ===== */
-@media (max-width:700px){
-  /* 3-up grid on phones for the About > gallery */
-  .gallery{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .gallery figure{ padding: 6px; }
-  .gallery figure img{ max-height: 140px; }
-  .gallery figure figcaption{ font-size: 12px; }
-
-  /* 3-up grid on phones for Personal page */
-  .pgrid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .pcard img{ height: 110px; }
-  .pcard figcaption{ font-size: 12px; }
-}
 
 /* footer */
 .footer{padding:28px 0;color:#6b7384;text-align:center}
 
-/* reveal animations */
-.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s, transform .6s}
+/* layout responsive */
+@media (max-width:980px){ .hero .wrap{grid-template-columns:1fr} }
+
+/* ---------- reveal animations ---------- */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
 .reveal.in{opacity:1; transform:none}
 .reveal.fade-left{transform:translateX(-16px)}
 .reveal.fade-right{transform:translateX(16px)}
-@media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none} }
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1; transform:none; transition:none}
+}
+
+/* ======== MOBILE TUNING YOU ASKED FOR ======== */
+/* 1) About > Personal Gallery: make it 3‑up on phones, add breathing room,
+      and use small thumbnails so you don’t have to scroll each image full-height. */
+@media (max-width:700px){
+  .gallery{
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    padding:0 6px;           /* extra inset so cards don’t touch the screen edges */
+  }
+  .gallery figure{ padding:8px; border-radius:12px; }
+  .gallery figure img{
+    height:120px;            /* small thumb height */
+    max-height:none;
+    object-fit:cover;        /* tidy thumbs; crops a little which is fine for previews */
+    width:100%;
+  }
+  .gallery figure figcaption{ font-size:11.5px; line-height:1.25; }
+}
+
+/* 2) Personal page grid: also 3‑up on phones with similar spacing. */
+@media (max-width:700px){
+  .pgrid{
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    padding:0 6px;           /* same edge inset */
+  }
+  .pcard{ border-radius:12px; }
+  .pcard img{
+    height:110px;
+    object-fit:cover;
+    width:100%;
+  }
+}
