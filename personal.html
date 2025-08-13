@@ -4,27 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal – Thomas Cobos Bernal</title>
-  <meta name="description" content="Personal gallery and family photos.">
+  <meta name="description" content="Personal gallery and family photos." />
   <link rel="stylesheet" href="styles.css" />
-  <!-- Favicon (ICO) -->
   <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 </head>
 <body>
 
-<!-- Navigation (same structure as index) -->
 <header class="nav">
   <div class="container inner">
-    <a class="brand" href="index.html#top">
-      <span class="brand-text">Thomas Cobos Bernal</span>
-    </a>
+    <a class="brand" href="index.html#top"><span class="brand-text">Thomas Cobos Bernal</span></a>
 
-    <!-- THEME TOGGLE -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="toggle-rail"><span class="toggle-thumb"></span></span>
+        <span class="toggle-label">Dark Mode</span>
+      </button>
 
-    <!-- mobile menu toggle -->
-    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
-      <span class="menu-bars"></span>
-    </button>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
+        <span class="menu-bars"></span>
+      </button>
+    </div>
 
     <nav id="site-menu" class="menu">
       <a href="index.html#about">About</a>
@@ -41,30 +40,22 @@
     <h1 style="margin:0 0 6px">Personal</h1>
     <p class="lead">A few family photos and personal moments. (The main site stays focused on work.)</p>
 
-    <!-- Uses the same pgrid/pcard styles from styles.css -->
     <div class="pgrid" style="margin-top:18px">
-      <!-- Replace these src files with your actual filenames in /images as needed -->
+      <!-- Replace with your real images under /images -->
       <figure class="pcard">
-        <img src="images/family-1.jpg" alt="Family day">
+        <img src="images/family-1.jpg" alt="Family day" />
         <figcaption>Family day.</figcaption>
       </figure>
 
       <figure class="pcard">
-        <img src="images/japan-1.jpg" alt="Off-duty moment in Japan">
+        <img src="images/japan-1.jpg" alt="Off-duty moment in Japan" />
         <figcaption>Japan — off-duty moment.</figcaption>
       </figure>
 
       <figure class="pcard">
-        <img src="images/volunteer-1.jpg" alt="Community volunteering">
+        <img src="images/volunteer-1.jpg" alt="Community volunteering" />
         <figcaption>Community volunteering.</figcaption>
       </figure>
-
-      <!-- Add more cards as you like
-      <figure class="pcard">
-        <img src="images/another-photo.jpg" alt="Description">
-        <figcaption>Your caption here.</figcaption>
-      </figure>
-      -->
     </div>
 
     <p style="margin-top:22px">
@@ -79,7 +70,6 @@
   </div>
 </footer>
 
-<!-- Reuse the same JS so the mobile menu + theme toggle work here too -->
 <script src="script.js"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
