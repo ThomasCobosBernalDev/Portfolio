@@ -314,3 +314,26 @@ a{color:var(--text);text-decoration:none}
 
 /* Center the meta line under buttons too */
 .hero .meta-line{ justify-content:center !important; }
+
+/* ===== FINAL OVERRIDES (put at very end of styles.css) ===== */
+
+/* Center the hero subtitle ("Transitioning from the Marine Corps…") */
+.hero .lead{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* About: force everything back to LEFT */
+#about .container{
+  text-align: left !important;
+}
+#about .lead{
+  text-align: left !important;
+  margin: 0 !important;              /* no centering */
+  max-width: 1000px !important;       /* keep the wider width you wanted */
+}
+#about .tags{
+  justify-content: flex-start !important;  /* chips left with the text */
+}
+
