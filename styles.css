@@ -9,6 +9,11 @@
   --accent-2:#06b6d4;    /* cyan */
   --container: 1180px;
   --radius: 16px;
+
+  /* chip defaults (used by cert link) */
+  --chip-bg:#f0f4ff;
+  --chip-border:#c7d6ff;
+  --chip-text:#1d3a8a;
 }
 
 /* ---------- theme (dark) ---------- */
@@ -20,6 +25,10 @@
   --line:#20283a;
   --accent:#3b82f6;
   --accent-2:#22d3ee;
+
+  --chip-bg:#172444;
+  --chip-border:#223560;
+  --chip-text:#b1c9ff;
 }
 
 /* base */
@@ -41,7 +50,7 @@ a{color:var(--text);text-decoration:none}
 .theme-dark .nav{ background:rgba(14,17,22,.85); }
 .nav .inner{
   display:flex;align-items:center;gap:16px; padding:14px 0;
-  flex-wrap:nowrap; /* prevent brand from pushing to next line */
+  flex-wrap:nowrap; /* prevent brand from wrapping */
 }
 .brand{flex:0 1 auto;min-width:0}
 .brand-text{
@@ -172,15 +181,12 @@ a{color:var(--text);text-decoration:none}
   list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:10px
 }
 .tags li, .tags span{
-  background:#f0f4ff;color:#1d3a8a;padding:7px 12px;border-radius:999px;
-  font-size:14px;border:1px solid #c7d6ff;box-shadow:0 1px 0 rgba(13, 42, 148, .08)
-}
-.theme-dark .tags li, .theme-dark .tags span{
-  background:#172444;color:#b1c9ff;border-color:#223560;
+  background:var(--chip-bg);color:var(--chip-text);padding:7px 12px;border-radius:999px;
+  font-size:14px;border:1px solid var(--chip-border);box-shadow:0 1px 0 rgba(13, 42, 148, .08)
 }
 .tags.small span{font-size:12px;padding:5px 10px}
-.bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
+/* clickable chip for cert link */
 .tags a.chip{
   display:inline-block;
   background: var(--chip-bg);
@@ -194,20 +200,14 @@ a{color:var(--text);text-decoration:none}
   text-decoration: none;
   line-height: 1.2;
 }
+.tags a.chip:hover{ transform: translateY(-1px); text-decoration:none; }
+.tags a.chip:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-.tags a.chip:hover{
-  transform: translateY(-1px);
-  text-decoration: none;
-}
-
-.tags a.chip:focus-visible{
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
+.bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
 /* ===== gallery (portrait-friendly) ===== */
 .gallery{
-  display:grid;gap:24px; /* extra space on desktop */
+  display:grid;gap:24px;               /* more space on desktop */
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px
 }
 .gallery figure{
@@ -219,7 +219,6 @@ a{color:var(--text);text-decoration:none}
 }
 .theme-dark .gallery figure img{background:#0f1524}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:#586174;font-size:14px}
-@media (max-width:700px){ .gallery{grid-template-columns:1fr; gap:14px } }
 
 /* ===== Personal tile ===== */
 .personal-tile{
@@ -242,13 +241,32 @@ a{color:var(--text);text-decoration:none}
 .personal-tile:hover .overlay span{ opacity:0; transform: translateY(6px); }
 .tile-caption{ text-align:center; color:var(--muted); margin-top:12px }
 
-/* Personal page cards */
+/* ===== Personal page cards ===== */
 .pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
 .pcard{ border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel);
   box-shadow:0 8px 26px rgba(15,23,42,.06); }
 .pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
 .pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
-@media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
+
+/* ===== Mobile layouts (3-up grids) ===== */
+@media (max-width:700px){
+  /* 3-up grid on phones for the About > gallery */
+  .gallery{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .gallery figure{ padding: 6px; }
+  .gallery figure img{ max-height: 140px; }
+  .gallery figure figcaption{ font-size: 12px; }
+
+  /* 3-up grid on phones for Personal page */
+  .pgrid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pcard img{ height: 110px; }
+  .pcard figcaption{ font-size: 12px; }
+}
 
 /* footer */
 .footer{padding:28px 0;color:#6b7384;text-align:center}
