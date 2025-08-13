@@ -296,6 +296,34 @@ a{color:var(--text);text-decoration:none}
   max-width:1000px;
   margin:0 auto;            /* center the wider paragraph */
 }
+
+/* ===== Overrides: center hero + center About (place at END of styles.css) ===== */
+
+/* Center the hero headline block on all screens */
+.hero .container.wrap,
+.hero .wrap{
+  display: flex !important;          /* beat older grid rule */
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 28px;
+}
+
+/* Center the "meta" line under buttons too */
+.hero .meta-line{ justify-content: center !important; }
+
+/* Center the About section and widen the paragraph */
+#about .container{ text-align: center !important; }
+#about .lead{
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+}
+
+/* Center the skill chips under About */
+#about .tags{
+  justify-content: center !important;
+}
+
 #about .tags{
   justify-content:center;   /* center the skill chips row */
 }
