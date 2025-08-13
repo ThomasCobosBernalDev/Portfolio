@@ -5,15 +5,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const id = a.getAttribute('href');
     if (id && id.length > 1) {
-      const target = document.querySelector(id);
-      if (target) {
+      const el = document.querySelector(id);
+      if (el) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: 'smooth' });
       }
     }
   });
 });
-
 
 /************************
  * Mobile menu toggling *
@@ -28,14 +27,13 @@ if (menuBtn && siteMenu) {
   });
 }
 
-
 /***************************************
  * Reveal-on-scroll (respects R.M.)     *
  ***************************************/
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!prefersReduced && 'IntersectionObserver' in window) {
-  const obs = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
@@ -51,73 +49,61 @@ if (!prefersReduced && 'IntersectionObserver' in window) {
   });
 }
 
-
 /*****************
- * Dark Mode 💡🌙 *
+ * Dark Mode      *
  *****************
- * This script assumes your HTML uses:
- *  - one or more checkbox inputs with class "dark-toggle"
- *  - optional label text spans with class "dark-label"
- *  - optional emoji spans with class "dark-emoji"
- * CSS should style body.dark-mode { ... } using CSS variables.
+ * HTML expected:
+ * <button id="theme-toggle" class="theme-toggle" aria-pressed="false">
+ *   <span class="toggle-rail"><span class="toggle-thumb"></span></span>
+ *   <span class="toggle-label">Dark Mode</span>
+ * </button>
+ *
+ * CSS expected: rules scoped under .theme-dark (on <html>)
  */
 (function () {
-  const STORAGE_KEY = 'theme';
+  const root   = document.documentElement;              // <html>
+  const toggle = document.getElementById('theme-toggle');
+  const label  = document.querySelector('.toggle-label');
+  const STORAGE_KEY = 'theme'; // 'dark' | 'light'
 
-  const toggles = () => Array.from(document.querySelectorAll('.dark-toggle'));
-  const labels  = () => Array.from(document.querySelectorAll('.dark-label'));
-  const emojis  = () => Array.from(document.querySelectorAll('.dark-emoji'));
-
-  const isDark = () => document.body.classList.contains('dark-mode');
-
-  function updateControls(dark) {
-    // sync all switches
-    toggles().forEach(t => { if (t.type === 'checkbox') t.checked = dark; });
-    // update any “Dark Mode / Light Mode” labels
-    labels().forEach(l => { l.textContent = dark ? 'Light Mode' : 'Dark Mode'; });
-    // optional emoji swap
-    emojis().forEach(e => { e.textContent = dark ? '🌙' : '☀️'; });
+  function setLabel(isDark){
+    if (!label) return;
+    // Show current mode text (you liked this behavior):
+    label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    // If you ever want it to show the ACTION instead, flip the strings above.
   }
 
-  function applyTheme(theme) {
-    const dark = theme === 'dark';
-    document.body.classList.toggle('dark-mode', dark);
-    updateControls(dark);
+  function applyTheme(theme, persist = true){
+    const isDark = theme === 'dark';
+    root.classList.toggle('theme-dark', isDark);
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    setLabel(isDark);
+    if (persist) localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light');
   }
 
-  // Initial theme: localStorage -> system preference -> light
+  // Initial theme: localStorage -> system -> light
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'dark' || stored === 'light') {
-    applyTheme(stored);
+    applyTheme(stored, false);
   } else {
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(systemDark ? 'dark' : 'light');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light', false);
   }
 
-  // Listen to all toggle switches (desktop & mobile)
-  toggles().forEach(t => {
-    t.addEventListener('change', () => {
-      const newTheme = t.checked ? 'dark' : 'light';
-      applyTheme(newTheme);
-      localStorage.setItem(STORAGE_KEY, newTheme);
-    });
+  // Toggle click
+  toggle?.addEventListener('click', () => {
+    const nowDark = !root.classList.contains('theme-dark') ? true : false;
+    applyTheme(nowDark ? 'dark' : 'light', true);
   });
 
-  // Keep theme in sync if the user changes OS setting while page is open
-  const media = window.matchMedia('(prefers-color-scheme: dark)');
-  if ('addEventListener' in media) {
-    media.addEventListener('change', e => {
-      // Only auto-follow system if user hasn’t explicitly chosen a theme
-      if (!localStorage.getItem(STORAGE_KEY)) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
-    });
-  } else if ('addListener' in media) {
-    // Safari < 14
-    media.addListener(e => {
-      if (!localStorage.getItem(STORAGE_KEY)) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
-    });
-  }
+  // Follow system changes ONLY if user hasn't chosen manually
+  const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  mq && (mq.addEventListener ? mq.addEventListener('change', e => {
+    if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light', false);
+  }) : mq.addListener && mq.addListener(e => {
+    if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light', false);
+  }));
 })();
