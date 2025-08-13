@@ -6,13 +6,24 @@
   <title>Personal – Thomas Cobos Bernal</title>
   <meta name="description" content="Personal gallery and family photos.">
   <link rel="stylesheet" href="styles.css" />
+  <!-- Optional favicon: place your file at /images/favicon.png or adjust path -->
+  <link rel="icon" type="image/png" href="images/favicon.ico">
 </head>
 <body>
 
+<!-- Navigation (same structure as index) -->
 <header class="nav">
   <div class="container inner">
-    <a class="brand" href="index.html#top"><span class="brand-text">Thomas Cobos Bernal</span></a>
-    <nav class="menu">
+    <a class="brand" href="index.html#top">
+      <span class="brand-text">Thomas Cobos Bernal</span>
+    </a>
+
+    <!-- mobile menu toggle -->
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
+      <span class="menu-bars"></span>
+    </button>
+
+    <nav id="site-menu" class="menu">
       <a href="index.html#about">About</a>
       <a href="index.html#experience">Experience</a>
       <a href="index.html#projects">Projects</a>
@@ -24,24 +35,33 @@
 
 <section class="section" id="personal">
   <div class="container">
-    <h1 style="margin:0 0 4px">Personal</h1>
+    <h1 style="margin:0 0 6px">Personal</h1>
     <p class="lead">A few family photos and personal moments. (The main site stays focused on work.)</p>
 
+    <!-- Uses the same pgrid/pcard styles from styles.css -->
     <div class="pgrid" style="margin-top:18px">
-      <!-- Replace image paths/captions with yours -->
+      <!-- Replace these src files with your actual filenames in /images as needed -->
       <figure class="pcard">
-        <img src="img/personal/family-1.jpg" alt="Family at the park">
-        <figcaption>Family day at the park.</figcaption>
+        <img src="images/family-1.jpg" alt="Family day">
+        <figcaption>Family day.</figcaption>
       </figure>
+
       <figure class="pcard">
-        <img src="img/personal/japan-1.jpg" alt="In Japan">
+        <img src="images/japan-1.jpg" alt="Off-duty moment in Japan">
         <figcaption>Japan — off-duty moment.</figcaption>
       </figure>
+
       <figure class="pcard">
-        <img src="img/personal/volunteer-1.jpg" alt="Volunteering">
-        <figcaption>Volunteering, river cleanup.</figcaption>
+        <img src="images/volunteer-1.jpg" alt="Community volunteering">
+        <figcaption>Community volunteering.</figcaption>
       </figure>
-      <!-- add more figures as needed -->
+
+      <!-- Add more cards as you like
+      <figure class="pcard">
+        <img src="images/another-photo.jpg" alt="Description">
+        <figcaption>Your caption here.</figcaption>
+      </figure>
+      -->
     </div>
 
     <p style="margin-top:22px">
@@ -56,8 +76,8 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<!-- Reuse the same JS so the mobile menu works here too -->
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
