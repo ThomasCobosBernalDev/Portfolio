@@ -70,7 +70,7 @@ a{color:var(--text);text-decoration:none}
 .btn.primary:hover{filter:brightness(1.05)}
 
 /* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;padding:96px 0 72px}
+.hero{position:relative;overflow:hidden;padding:110px 0 84px}
 .bg-grid{
   position:absolute;inset:0;pointer-events:none;opacity:.35;
   background-image:
@@ -84,9 +84,19 @@ a{color:var(--text);text-decoration:none}
               radial-gradient(closest-side at 70% 70%, rgba(6,182,212,.18), transparent 70%);
   filter: blur(20px);
 }
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
-.hero h1{font-size:clamp(32px,5vw,50px);margin:6px 0 12px}
-.hl{background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* simplified hero (no right-side card) */
+.hero .wrap{position:relative}
+.hero-copy{max-width:900px}
+.hero h1{
+  font-size:clamp(36px,6vw,64px);
+  line-height:1.08;
+  margin:10px 0 12px;
+}
+.hl{
+  background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
 .badge{
   display:inline-block;background:#e8f0ff;color:#1d4ed8;border:1px solid #cfe0ff;
   padding:4px 10px;border-radius:999px;font-size:12px;margin-bottom:12px
@@ -96,18 +106,6 @@ a{color:var(--text);text-decoration:none}
 .meta-line{margin-top:12px;color:#6b7384;font-size:14px;display:flex;align-items:center;gap:8px}
 .meta-line .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
 
-/* quick stats card */
-.card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:18px;box-shadow:0 8px 28px rgba(15,23,42,.06)
-}
-.card-title{margin:0 0 12px}
-.stats .stat-list{
-  list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px
-}
-.stat-k{display:block;font-weight:800;font-size:20px;line-height:1;color:var(--accent)}
-.stat-label{display:block;color:#647089;font-size:13px}
-
 /* ---------- sections ---------- */
 .section{padding:72px 0;border-top:1px solid var(--line)}
 .section h2{font-size:28px;margin:0 0 12px}
@@ -115,6 +113,10 @@ a{color:var(--text);text-decoration:none}
 
 /* cards/grid */
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;box-shadow:0 8px 28px rgba(15,23,42,.06)
+}
 .card:hover{transform:translateY(-2px);transition:transform .15s}
 
 /* tags / chips */
@@ -128,18 +130,18 @@ a{color:var(--text);text-decoration:none}
 .tags.small span{font-size:12px;padding:5px 10px}
 .bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
-/* gallery */
+/* --- About > Personal Gallery (portrait-friendly, spaced, centered) --- */
 .gallery{
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  justify-content: center;        /* Center grid items */
+  justify-content: center;        /* center cards */
 }
 @media (min-width: 768px){
   .gallery{
     gap: 28px;                    /* more space on desktop */
-    justify-content: center;      /* keep centered on wide screens */
-    max-width: 1100px;            /* prevent stretching too far */
+    justify-content: center;
+    max-width: 1100px;            /* avoid full-width stretch */
     margin-left: auto;
     margin-right: auto;
   }
@@ -157,11 +159,11 @@ a{color:var(--text);text-decoration:none}
 }
 .gallery figure img{
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  background: #f6f7fb;
+  height: auto;                 /* no crop */
+  object-fit: contain;          /* fit entire portrait */
+  background: #f6f7fb;          /* subtle backdrop for letterboxing */
   border-radius: 10px;
-  max-height: 520px;
+  max-height: 520px;            /* protect against super tall images on desktop */
 }
 .gallery figure figcaption{
   margin-top: 10px;
@@ -169,26 +171,12 @@ a{color:var(--text);text-decoration:none}
   color: #586174;
   font-size: 14px;
 }
-@media (max-width: 700px){
-  .gallery{grid-template-columns: 1fr;}
+/* Phone: single column so images align straight down */
+@media (max-width:700px){
+  .gallery{grid-template-columns:1fr}
 }
 @media (max-width: 640px){
-  .gallery figure img{max-height: 70vh;}
-}
-
-/* footer */
-.footer{padding:28px 0;color:#6b7384;text-align:center}
-
-/* layout responsive */
-@media (max-width:980px){ .hero .wrap{grid-template-columns:1fr} }
-
-/* ---------- reveal animations ---------- */
-.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
-.reveal.in{opacity:1; transform:none}
-.reveal.fade-left{transform:translateX(-16px)}
-.reveal.fade-right{transform:translateX(16px)}
-@media (prefers-reduced-motion: reduce){
-  .reveal{opacity:1; transform:none; transition:none}
+  .gallery figure img{max-height: 70vh}
 }
 
 /* ---- Personal tile ---- */
@@ -211,6 +199,22 @@ a{color:var(--text);text-decoration:none}
 }
 .personal-tile:hover img{ filter:none; transform: scale(1.0); }
 .personal-tile:hover .overlay{ background:rgba(0,0,0,0); }
+.personal-tile .overlay span{
+  transition: opacity .18s ease, transform .18s ease;
+}
+.personal-tile:hover .overlay span{
+  opacity: 0;
+  transform: translateY(6px);
+}
+/* slightly smaller on desktop */
+@media (min-width: 1024px) {
+  .personal-tile {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/* Personal page gallery (if you use personal.html) */
 .pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
 .pcard{
   border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
@@ -219,17 +223,20 @@ a{color:var(--text);text-decoration:none}
 .pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
 .pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
 @media (max-width:680px){ .pgrid{ grid-template-columns:1fr; } }
-.personal-tile .overlay span{
-  transition: opacity .18s ease, transform .18s ease;
+
+/* footer */
+.footer{padding:28px 0;color:#6b7384;text-align:center}
+
+/* layout responsive */
+@media (max-width:980px){
+  .hero-copy{max-width: 100%}
 }
-.personal-tile:hover .overlay span{
-  opacity: 0;
-  transform: translateY(6px);
-}
-@media (min-width: 1024px) {
-  .personal-tile img {
-    max-width: 90%;
-    display: block;
-    margin: 0 auto;
-  }
+
+/* ---------- reveal animations ---------- */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1; transform:none}
+.reveal.fade-left{transform:translateX(-16px)}
+.reveal.fade-right{transform:translateX(16px)}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1; transform:none; transition:none}
 }
