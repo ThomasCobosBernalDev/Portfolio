@@ -1,16 +1,28 @@
-/* ---------- theme ---------- */
+/* ===================== THEME TOKENS ===================== */
 :root{
-  --bg: #f6f8fc;
+  --bg:#f6f8fc;
   --panel:#ffffff;
   --text:#0b1220;
   --muted:#4b5567;
   --line:#e5e9f2;
   --accent:#2563eb;
   --accent-2:#06b6d4;
-  --container: 1180px;
-  --radius: 16px;
+  --container:1180px;
+  --radius:16px;
 }
 
+html[data-theme="dark"],
+:root[data-theme="dark"]{
+  --bg:#0f1626;
+  --panel:#111a2d;
+  --text:#e6ecff;
+  --muted:#a6b0c6;
+  --line:#1f2a44;
+  --accent:#4f7cff;
+  --accent-2:#2dd4bf;
+}
+
+/* ===================== BASE ===================== */
 *{box-sizing:border-box}
 html,body{
   margin:0;background:var(--bg);color:var(--text);
@@ -19,30 +31,55 @@ html,body{
 a{color:var(--text);text-decoration:none}
 .container{max-width:var(--container);margin:0 auto;padding:0 24px}
 
-/* ---------- nav ---------- */
+/* ===================== NAV ===================== */
 .nav{
   position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.95);
+  background:color-mix(in oklab, var(--panel) 92%, transparent);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand-text{font-weight:900;letter-spacing:.3px;font-size: clamp(18px, 3vw, 24px)}
+.nav .inner{
+  display:flex;align-items:center;justify-content:space-between;padding:14px 0
+}
+.brand-text{
+  font-weight:900;letter-spacing:.3px;white-space:nowrap;
+  font-size:clamp(18px,3vw,24px)
+}
+
+/* actions (toggle + burger) */
+.nav-actions{display:flex;align-items:center;gap:10px}
+
+/* theme toggle pill */
+.theme-toggle{
+  display:flex;align-items:center;gap:10px;
+  padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel);color:var(--text);cursor:pointer;
+}
+.theme-toggle .toggle-label{font-weight:600;font-size:14px}
+.theme-toggle .toggle-rail{
+  width:44px;height:26px;border-radius:999px;background:#cbd5e1;position:relative;
+}
+.theme-toggle .toggle-thumb{
+  position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:#fff;transition:transform .2s ease
+}
+.theme-toggle[aria-pressed="true"] .toggle-thumb{ transform:translateX(18px) }
+html[data-theme="dark"] .theme-toggle .toggle-rail{ background:#334155 }
 
 /* desktop menu */
 .menu{display:flex;align-items:center;gap:16px}
 .menu a{padding:8px 10px;border-radius:10px}
 .menu a.btn{border:1px solid var(--line)}
 
-/* hamburger */
+/* hamburger (mobile) */
 .menu-toggle{
   display:none;position:relative;width:42px;height:38px;border:1px solid var(--line);
-  border-radius:10px;background:#fff
+  border-radius:10px;background:var(--panel)
 }
 .menu-toggle .menu-bars,
 .menu-toggle .menu-bars:before,
 .menu-toggle .menu-bars:after{
-  content:"";position:absolute;left:10px;right:10px;height:2px;background:#111;border-radius:2px
+  content:"";position:absolute;left:10px;right:10px;height:2px;background:var(--text);border-radius:2px
 }
 .menu-toggle .menu-bars{top:50%;transform:translateY(-50%)}
 .menu-toggle .menu-bars:before{top:-8px}
@@ -53,30 +90,36 @@ a{color:var(--text);text-decoration:none}
   .menu-toggle{display:block}
   .menu{
     position:absolute;right:24px;top:100%;display:none;flex-direction:column;align-items:flex-start;
-    background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;gap:8px;
     box-shadow:0 12px 30px rgba(15,23,42,.12)
   }
   .menu.open{display:flex}
 }
 
-/* ---------- buttons ---------- */
+/* ===================== BUTTONS ===================== */
 .btn{
   display:inline-block;border:1px solid var(--line);
   padding:10px 16px;border-radius:12px;
   transition:.15s background,.15s transform,.15s border-color
 }
 .btn:hover{transform:translateY(-1px);background:#f1f5f9;border-color:#cfd8e5}
+html[data-theme="dark"] .btn:hover{background:#0b1220;border-color:#26314d}
 .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 .btn.primary:hover{filter:brightness(1.05)}
 
-/* ---------- hero ---------- */
+/* ===================== HERO ===================== */
 .hero{position:relative;overflow:hidden;padding:96px 0 72px}
 .bg-grid{
   position:absolute;inset:0;pointer-events:none;opacity:.35;
   background-image:
     linear-gradient(#e9eef8 1px, transparent 1px),
     linear-gradient(90deg, #e9eef8 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size:28px 28px;
+}
+html[data-theme="dark"] .bg-grid{
+  background-image:
+    linear-gradient(#1d2740 1px, transparent 1px),
+    linear-gradient(90deg, #1d2740 1px, transparent 1px);
 }
 .bg-accent{
   position:absolute;right:-140px;top:-140px;width:420px;height:420px;
@@ -91,31 +134,26 @@ a{color:var(--text);text-decoration:none}
   display:inline-block;background:#e8f0ff;color:#1d4ed8;border:1px solid #cfe0ff;
   padding:4px 10px;border-radius:999px;font-size:12px;margin-bottom:12px
 }
+html[data-theme="dark"] .badge{background:#10223f;border-color:#1c3666;color:#9bb7ff}
 .lead{color:var(--muted);max-width:780px}
-.cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
 .meta-line{margin-top:12px;color:#6b7384;font-size:14px;display:flex;align-items:center;gap:8px}
 .meta-line .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+@media (max-width:980px){ .hero .wrap{grid-template-columns:1fr} }
 
-/* quick stats card */
+/* quick card (generic) */
 .card{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:18px;box-shadow:0 8px 28px rgba(15,23,42,.06)
 }
-.card-title{margin:0 0 12px}
-.stats .stat-list{
-  list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px
-}
-.stat-k{display:block;font-weight:800;font-size:20px;line-height:1;color:var(--accent)}
-.stat-label{display:block;color:#647089;font-size:13px}
+.card:hover{transform:translateY(-2px);transition:transform .15s}
 
-/* ---------- sections ---------- */
+/* ===================== SECTIONS ===================== */
 .section{padding:72px 0;border-top:1px solid var(--line)}
 .section h2{font-size:28px;margin:0 0 12px}
 .subheading{margin-top:28px}
 
-/* cards/grid */
+/* grid cards */
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px}
-.card:hover{transform:translateY(-2px);transition:transform .15s}
 
 /* tags / chips */
 .tags, .bullets{
@@ -125,136 +163,89 @@ a{color:var(--text);text-decoration:none}
   background:#f0f4ff;color:#1d3a8a;padding:7px 12px;border-radius:999px;
   font-size:14px;border:1px solid #c7d6ff;box-shadow:0 1px 0 rgba(13, 42, 148, .08)
 }
-.tags.small span{font-size:12px;padding:5px 10px}
-.bullets li{width:100%;margin:6px 0;color:var(--muted)}
+html[data-theme="dark"] .tags li,
+html[data-theme="dark"] .tags span{
+  background:#0f203e;color:#b8c7ff;border-color:#1d335f;
+}
 
-/* -------- Personal Gallery (About) -------- */
+/* ===================== ABOUT > PERSONAL GALLERY ===================== */
+/* Desktop / general */
 .gallery{
-  display:grid;
-  gap:16px;
+  display:grid;gap:16px;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   margin-top:16px;
-  /* ensure a little inner padding so cards don't kiss the edge on narrow screens */
-  padding:0 2px;
 }
 .gallery figure{
-  margin:0;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 8px 26px rgba(15,23,42,.06);
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  margin:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);
+  box-shadow:0 8px 26px rgba(15,23,42,.06);padding:12px;display:flex;flex-direction:column;align-items:center
 }
 .gallery figure img{
-  width:100%;
-  height:auto;              /* default: no crop on wider screens */
-  object-fit:contain;
-  background:#f6f7fb;
-  border-radius:10px;
-  max-height:520px;
+  width:100%;height:auto;object-fit:contain;background:#f6f7fb;border-radius:10px;max-height:520px;
 }
-.gallery figure figcaption{
-  margin-top:10px;
-  text-align:center;
-  color:#586174;
-  font-size:14px;
+html[data-theme="dark"] .gallery figure img{background:#0f203e}
+.gallery figure figcaption{margin-top:10px;text-align:center;color:#586174;font-size:14px}
+
+/* Phone: three-up thumbnails with breathing room */
+@media (max-width:700px){
+  .container{padding:0 14px}
+  .gallery{
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .gallery figure{padding:10px}
+  .gallery figure img{
+    height:120px;           /* small thumb */
+    max-height:none;        /* override desktop limit */
+    object-fit:cover;       /* fill the thumb nicely */
+    border-radius:10px;
+  }
+  .gallery figure figcaption{font-size:12px}
 }
 
-/* -------- Personal tile -------- */
+/* ===================== PERSONAL TILE ===================== */
 .personal-tile{
-  position:relative; display:block; border-radius:16px; overflow:hidden;
-  border:1px solid var(--line); box-shadow:0 10px 30px rgba(15,23,42,.08);
-  aspect-ratio: 16 / 9; background:#f3f6ff;
+  position:relative;display:block;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:0 10px 30px rgba(15,23,42,.08);
+  aspect-ratio:16/9;background:#f3f6ff;
 }
+html[data-theme="dark"] .personal-tile{background:#0f203e}
 .personal-tile img{
-  width:100%; height:100%; object-fit:cover; display:block;
-  filter: blur(1px) brightness(.8);
-  transform: scale(1.02);
-  transition: filter .2s ease, transform .2s ease;
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:blur(1px) brightness(.8);transform:scale(1.02);
+  transition:filter .2s ease, transform .2s ease;
 }
 .personal-tile .overlay{
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35));
-  color:#fff; font-weight:800; letter-spacing:.3px; font-size:clamp(18px,3vw,28px);
-  transition: background .2s ease, opacity .2s ease;
+  color:#fff;font-weight:800;letter-spacing:.3px;font-size:clamp(18px,3vw,28px);
+  transition:background .2s ease, opacity .2s ease;
 }
-.personal-tile:hover img{ filter:none; transform: scale(1.0); }
-.personal-tile:hover .overlay{ background:rgba(0,0,0,0); }
+.personal-tile:hover img{filter:none;transform:scale(1.0)}
+.personal-tile:hover .overlay{background:rgba(0,0,0,0)}
+.tile-caption{margin-top:12px;text-align:center;color:var(--muted)}
 
-.personal-tile .overlay span{
-  transition: opacity .18s ease, transform .18s ease;
-}
-.personal-tile:hover .overlay span{
-  opacity: 0;
-  transform: translateY(6px);
-}
-
-/* shrink the tile image a bit on desktop so it doesn’t dominate */
+/* On desktop keep the cover centered but not stretched weirdly */
 @media (min-width:1024px){
-  .personal-tile img{
-    max-width:90%;
-    display:block;
-    margin:0 auto;
-  }
+  .personal-tile img{object-fit:cover}
 }
 
-/* -------- Personal page gallery -------- */
-.pgrid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
-.pcard{
-  border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
-  box-shadow:0 8px 26px rgba(15,23,42,.06);
+/* ===================== PERSONAL PAGE GRID ===================== */
+.pgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:0 8px 26px rgba(15,23,42,.06)}
+.pcard img{width:100%;height:260px;object-fit:cover;display:block}
+.pcard figcaption{padding:10px 12px;color:#586174;font-size:14px}
+@media (max-width:700px){
+  .pgrid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .pcard img{height:120px}
+  .pcard figcaption{font-size:12px}
 }
-.pcard img{ width:100%; height:240px; object-fit:cover; display:block; }
-.pcard figcaption{ padding:10px 12px; color:#586174; font-size:14px; }
 
-/* footer */
-.footer{padding:28px 0;color:#6b7384;text-align:center}
-
-/* layout responsive */
-@media (max-width:980px){ .hero .wrap{grid-template-columns:1fr} }
-
-/* ---------- reveal animations ---------- */
-.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
-.reveal.in{opacity:1; transform:none}
+/* ===================== REVEAL ANIMATIONS ===================== */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
 .reveal.fade-left{transform:translateX(-16px)}
 .reveal.fade-right{transform:translateX(16px)}
-@media (prefers-reduced-motion: reduce){
-  .reveal{opacity:1; transform:none; transition:none}
-}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-/* ======== MOBILE TUNING YOU ASKED FOR ======== */
-/* 1) About > Personal Gallery: make it 3‑up on phones, add breathing room,
-      and use small thumbnails so you don’t have to scroll each image full-height. */
-@media (max-width:700px){
-  .gallery{
-    grid-template-columns:repeat(3, 1fr);
-    gap:14px;
-    padding:0 6px;           /* extra inset so cards don’t touch the screen edges */
-  }
-  .gallery figure{ padding:8px; border-radius:12px; }
-  .gallery figure img{
-    height:120px;            /* small thumb height */
-    max-height:none;
-    object-fit:cover;        /* tidy thumbs; crops a little which is fine for previews */
-    width:100%;
-  }
-  .gallery figure figcaption{ font-size:11.5px; line-height:1.25; }
-}
-
-/* 2) Personal page grid: also 3‑up on phones with similar spacing. */
-@media (max-width:700px){
-  .pgrid{
-    grid-template-columns:repeat(3, 1fr);
-    gap:14px;
-    padding:0 6px;           /* same edge inset */
-  }
-  .pcard{ border-radius:12px; }
-  .pcard img{
-    height:110px;
-    object-fit:cover;
-    width:100%;
-  }
-}
+/* ===================== FOOTER ===================== */
+.footer{padding:28px 0;color:#6b7384;text-align:center}
