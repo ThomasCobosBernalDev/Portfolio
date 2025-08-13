@@ -63,12 +63,18 @@ a{color:var(--text);text-decoration:none}
 .brand-text{
   font-weight:900;letter-spacing:.3px;
   font-size:clamp(18px,3vw,24px);
-  white-space:nowrap;
+  white-space:nowrap; /* keep on one line on mobile */
 }
+
+/* actions (toggle + burger) */
 .nav-actions{display:flex;align-items:center;gap:10px}
+
+/* desktop menu */
 .menu{display:flex;align-items:center;gap:16px}
 .menu a{padding:8px 10px;border-radius:10px}
 .menu a.btn{border:1px solid var(--line)}
+
+/* mobile burger */
 .menu-toggle{
   display:none;position:relative;width:42px;height:38px;border:1px solid var(--line);
   border-radius:10px;background:var(--panel)
@@ -81,6 +87,8 @@ a{color:var(--text);text-decoration:none}
 .menu-toggle .menu-bars{top:50%;transform:translateY(-50%)}
 .menu-toggle .menu-bars:before{top:-8px}
 .menu-toggle .menu-bars:after{top:8px}
+
+/* mobile dropdown */
 @media (max-width:860px){
   .menu-toggle{display:block}
   .menu{
@@ -92,7 +100,7 @@ a{color:var(--text);text-decoration:none}
 }
 
 /* ===============================
-   THEME TOGGLE
+   THEME TOGGLE (button with rail+thumb)
    =============================== */
 .theme-toggle{
   display:inline-flex;align-items:center;gap:10px;
@@ -108,8 +116,10 @@ a{color:var(--text);text-decoration:none}
   background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);
   transition:left .18s ease, background .18s ease;
 }
+/* ON state is via [aria-pressed="true"] */
 .theme-toggle[aria-pressed="true"] .toggle-rail{background:var(--accent)}
 .theme-toggle[aria-pressed="true"] .toggle-thumb{left:25px;background:#fff}
+
 .toggle-label{font-weight:600}
 [data-theme="dark"] .toggle-label{color:var(--text)}
 
@@ -137,7 +147,16 @@ a{color:var(--text);text-decoration:none}
     radial-gradient(closest-side at 70% 70%, color-mix(in oklab, var(--accent-2) 30%, transparent), transparent 70%);
   filter:blur(20px);
 }
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+
+/* Center the hero content (single-column, centered) */
+.hero .wrap{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr;          /* force one column */
+  justify-items:center;               /* center the inner block */
+  gap:28px;align-items:center;
+  text-align:center;                  /* center text */
+}
 .hero h1{font-size:clamp(32px,5vw,50px);margin:6px 0 12px}
 .hl{background:linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .badge{
@@ -146,8 +165,8 @@ a{color:var(--text);text-decoration:none}
 }
 :root[data-theme="dark"] .badge{background:#1b2742;color:#93c5fd;border-color:#31436a}
 .lead{color:var(--muted);max-width:780px}
-.cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-.meta-line{margin-top:12px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
+.cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.meta-line{margin-top:12px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px;justify-content:center}
 .meta-line .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
 @media (max-width:980px){ .hero .wrap{grid-template-columns:1fr} }
 
@@ -167,6 +186,7 @@ a{color:var(--text);text-decoration:none}
 .section{padding:72px 0;border-top:1px solid var(--line)}
 .section h2{font-size:28px;margin:0 0 12px}
 .subheading{margin-top:28px}
+
 .tags,.bullets{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:10px}
 .tags li,.tags span{
   background:var(--chip-bg);color:var(--chip-text);padding:7px 12px;border-radius:999px;
@@ -203,7 +223,8 @@ a{color:var(--text);text-decoration:none}
 .tile-caption{margin-top:12px;text-align:center;color:var(--muted)}
 
 /* ===============================
-   GALLERY
+   GALLERY (About > Personal Gallery)
+   – mobile 3-up with spacing; desktop auto-fit
    =============================== */
 .gallery{
   display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -219,16 +240,16 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: 3-up with spacing — */
+/* — Phone: 3-up, with breathing room and fixed image box — */
 @media (max-width:700px){
   .gallery{grid-template-columns:repeat(3, 1fr);gap:12px}
   .gallery figure{padding:8px}
   .gallery figure img{
     width:100%;
-    height:150px;
-    object-fit:cover;
-    max-height:none;
-    background:transparent;
+    height:150px;            /* fixed box */
+    object-fit:contain;      /* no stretch */
+    max-height:none;         /* override desktop cap */
+    background:#eef2ff;      /* soft backdrop on mobile */
     border-radius:8px;
   }
   .gallery figure figcaption{font-size:12px}
@@ -242,14 +263,10 @@ a{color:var(--text);text-decoration:none}
 .pcard img{width:100%;height:240px;object-fit:cover;display:block}
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
-/* Phone: 3-up */
+/* Phone: 3-up like index gallery */
 @media (max-width:700px){
   .pgrid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .pcard img{
-    height:150px;
-    object-fit:cover;
-    background:transparent;
-  }
+  .pcard img{height:150px}
   .pcard figcaption{font-size:12px}
 }
 
@@ -259,7 +276,7 @@ a{color:var(--text);text-decoration:none}
 .footer{padding:28px 0;color:var(--muted);text-align:center}
 
 /* ===============================
-   REVEAL ANIMS
+   REVEAL ANIMS (safe for reduced motion)
    =============================== */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -267,4 +284,18 @@ a{color:var(--text);text-decoration:none}
 .reveal.fade-right{transform:translateX(16px)}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ===============================
+   ABOUT — center section + widen copy + center tags
+   =============================== */
+#about{
+  text-align:center;
+}
+#about .lead{
+  max-width:1000px;
+  margin:0 auto;            /* center the wider paragraph */
+}
+#about .tags{
+  justify-content:center;   /* center the skill chips row */
 }
