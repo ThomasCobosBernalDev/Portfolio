@@ -181,6 +181,30 @@ a{color:var(--text);text-decoration:none}
 .tags.small span{font-size:12px;padding:5px 10px}
 .bullets li{width:100%;margin:6px 0;color:var(--muted)}
 
+.tags a.chip{
+  display:inline-block;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  border: 1px solid var(--chip-border);
+  box-shadow: 0 1px 0 rgba(13, 42, 148, .08);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.tags a.chip:hover{
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.tags a.chip:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* ===== gallery (portrait-friendly) ===== */
 .gallery{
   display:grid;gap:24px; /* extra space on desktop */
