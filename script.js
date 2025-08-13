@@ -37,27 +37,32 @@ if (!prefersReduced && 'IntersectionObserver' in window){
   });
 }
 
-// -------- Dark mode toggle with persistence
+// -------- Dark mode toggle with persistence + dynamic label
 (function(){
   const root = document.documentElement;
   const toggle = document.getElementById('theme-toggle');
+  const label = toggle?.querySelector('.toggle-label');
+
+  // helper to set UI text and aria
+  function applyLabel(isDark){
+    if (!label || !toggle) return;
+    // show the CURRENT mode text
+    label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
 
   // initial state from storage or system
   const stored = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const dark = stored ? stored === 'dark' : prefersDark;
 
-  if (dark) {
-    root.classList.add('theme-dark');
-    toggle?.setAttribute('aria-pressed','true');
-  } else {
-    root.classList.remove('theme-dark');
-    toggle?.setAttribute('aria-pressed','false');
-  }
+  if (dark) root.classList.add('theme-dark'); else root.classList.remove('theme-dark');
+  applyLabel(dark);
 
   toggle?.addEventListener('click', ()=>{
-    const on = root.classList.toggle('theme-dark');
-    toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
-    localStorage.setItem('theme', on ? 'dark' : 'light');
+    const isDark = root.classList.toggle('theme-dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyLabel(isDark);
   });
 })();
