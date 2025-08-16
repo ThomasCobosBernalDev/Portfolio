@@ -63,7 +63,7 @@ a{color:var(--text);text-decoration:none}
 .brand-text{
   font-weight:900;letter-spacing:.3px;
   font-size:clamp(18px,3vw,24px);
-  white-space:nowrap; /* keep on one line on mobile */
+  white-space:nowrap;
 }
 
 /* actions (toggle + burger) */
@@ -152,10 +152,10 @@ a{color:var(--text);text-decoration:none}
 .hero .wrap{
   position:relative;
   display:grid;
-  grid-template-columns:1fr;          /* force one column */
-  justify-items:center;               /* center the inner block */
+  grid-template-columns:1fr;
+  justify-items:center;
   gap:28px;align-items:center;
-  text-align:center;                  /* center text (title + subtitle) */
+  text-align:center;
 }
 .hero h1{font-size:clamp(32px,5vw,50px);margin:6px 0 12px}
 .hl{background:linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -246,10 +246,10 @@ a{color:var(--text);text-decoration:none}
   .gallery figure{padding:8px}
   .gallery figure img{
     width:100%;
-    height:150px;            /* fixed box */
-    object-fit:contain;      /* no stretch */
-    max-height:none;         /* override desktop cap */
-    background:#eef2ff;      /* soft backdrop on mobile */
+    height:150px;
+    object-fit:contain;
+    max-height:none;
+    background:#eef2ff;
     border-radius:8px;
   }
   .gallery figure figcaption{font-size:12px}
@@ -263,7 +263,6 @@ a{color:var(--text);text-decoration:none}
 .pcard img{width:100%;height:240px;object-fit:cover;display:block}
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
-/* Phone: make personal page cards wider (2-up), then 1-up on very small screens */
 @media (max-width:700px){
   .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
   .pcard img{height:180px}
@@ -298,10 +297,10 @@ a{color:var(--text);text-decoration:none}
 }
 #about .lead{
   max-width:1000px;
-  margin:0;                 /* left align block, no auto-centering */
+  margin:0;
 }
 #about .tags{
-  justify-content:flex-start; /* align chips left with text */
+  justify-content:flex-start;
 }
 
 /* ===== Overrides to guarantee layout intent ===== */
@@ -312,16 +311,12 @@ a{color:var(--text);text-decoration:none}
   display:flex !important;
   flex-direction:column !important;
   align-items:center !important;
-  text-align:center !important;   /* includes subtitle under title */
+  text-align:center !important;
   gap:28px;
 }
 
-/* Center the meta line under buttons too */
 .hero .meta-line{ justify-content:center !important; }
 
-/* ===== FINAL OVERRIDES (put at very end of styles.css) ===== */
-
-/* Center the hero subtitle ("Transitioning from the Marine Corps…") */
 .hero .lead{
   text-align: center !important;
   margin-left: auto !important;
@@ -334,9 +329,9 @@ a{color:var(--text);text-decoration:none}
 }
 #about .lead{
   text-align: left !important;
-  margin: 0 !important;              /* no centering */
-  max-width: 1000px !important;       /* keep the wider width you wanted */
+  margin: 0 !important;
+  max-width: 1000px !important;
 }
 #about .tags{
-  justify-content: flex-start !important;  /* chips left with the text */
+  justify-content: flex-start !important;
 }
