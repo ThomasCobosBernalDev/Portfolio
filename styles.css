@@ -65,15 +65,17 @@ a{color:var(--text);text-decoration:none}
 }
 .nav .inner{
   display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px;
+  flex-wrap:nowrap;
 }
 .brand-text{
   font-weight:900;letter-spacing:.3px;
   font-size:clamp(18px,3vw,24px);
   white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis; /* prevent pushing buttons offscreen */
 }
 
 /* actions (toggle + burger) */
-.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
 
 /* desktop menu */
 .menu{display:flex;align-items:center;gap:16px}
@@ -83,7 +85,7 @@ a{color:var(--text);text-decoration:none}
 /* mobile burger */
 .menu-toggle{
   display:none;position:relative;width:42px;height:38px;border:1px solid var(--line);
-  border-radius:10px;background:var(--panel)
+  border-radius:10px;background:var(--panel);flex:0 0 auto;
 }
 .menu-toggle .menu-bars,
 .menu-toggle .menu-bars:before,
@@ -105,6 +107,13 @@ a{color:var(--text);text-decoration:none}
   .menu.open{display:flex}
 }
 
+/* extra-narrow phones: keep buttons visible, avoid clipping */
+@media (max-width:380px){
+  .container{padding:0 12px}
+  .nav .inner{padding:14px 0}
+  .nav-actions{gap:8px}
+}
+
 /* ===============================
    THEME TOGGLE (button with rail+thumb)
    =============================== */
@@ -112,19 +121,19 @@ a{color:var(--text);text-decoration:none}
   display:inline-flex;align-items:center;gap:10px;
   border:1px solid var(--line);background:var(--panel);
   color:var(--text);padding:6px 10px;border-radius:12px;cursor:pointer;
-  white-space:nowrap; /* stop label wrapping that can crush the rail */
+  white-space:nowrap;
 }
 .theme-toggle .toggle-rail{
   position:relative;
   width:var(--toggle-w);
-  min-width:var(--toggle-w);       /* rail never shrinks on mobile */
+  min-width:var(--toggle-w);
   height:var(--toggle-h);
   border-radius:999px;
   background:var(--line);
   display:inline-block;
   vertical-align:middle;
   transition:background .15s ease;
-  overflow:hidden;                  /* no thumb peek */
+  overflow:hidden;
 }
 .theme-toggle .toggle-thumb{
   position:absolute;
@@ -135,23 +144,19 @@ a{color:var(--text);text-decoration:none}
   border-radius:50%;
   background:#fff;
   box-shadow:0 2px 6px rgba(0,0,0,.25);
-  transform:translate(0,-50%);      /* vertical centering */
+  transform:translate(0,-50%);
   transition:transform .18s ease;
-  will-change:transform;
 }
-/* ON state: slide strictly within the rail width (no clipping) */
 .theme-toggle[aria-pressed="true"] .toggle-rail{background:var(--accent)}
 .theme-toggle[aria-pressed="true"] .toggle-thumb{
   transform:translate(calc(var(--toggle-w) - var(--thumb-d) - (var(--toggle-pad) * 2)), -50%);
 }
-
-/* Tiny screens: slightly smaller switch so it always fits */
 @media (max-width:380px){
   :root{
     --toggle-w:44px;
     --toggle-h:24px;
     --thumb-d:18px;
-    --toggle-pad:4px;               /* extra inset avoids visual clipping */
+    --toggle-pad:4px;
   }
 }
 
@@ -274,7 +279,7 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: hard 2-up alignment, equal cards */
+/* — Phone: hard 2-up + fix reveal drift */
 @media (max-width:700px){
   .gallery{
     grid-template-columns:repeat(2, 1fr);
@@ -283,7 +288,7 @@ a{color:var(--text);text-decoration:none}
   .gallery figure{padding:8px;height:100%}
   .gallery figure img{
     width:100%;
-    height:200px;          /* fixed thumb height: keeps rows aligned */
+    height:200px;          /* fixed thumb height keeps rows aligned */
     object-fit:cover;
     object-position:center;
     max-height:none;
@@ -292,12 +297,12 @@ a{color:var(--text);text-decoration:none}
   }
   .gallery figure figcaption{
     font-size:12px;
-    min-height:44px;       /* equalize caption block height */
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+    min-height:44px;       /* equal caption blocks */
+    display:flex;align-items:center;justify-content:center;text-align:center;
   }
+  /* kill horizontal offsets from fade-left/right on small screens */
+  .reveal.fade-left,
+  .reveal.fade-right{ transform:translateY(16px) !important; }
 }
 
 /* ===============================
@@ -307,7 +312,7 @@ a{color:var(--text);text-decoration:none}
 .pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
-/* Desktop: swapped columns + consistent image height */
+/* Desktop: swap columns + consistent image height */
 @media (min-width:701px){
   .pgrid{grid-template-columns:repeat(2,1fr)}
   .pcard{height:100%}
@@ -317,14 +322,14 @@ a{color:var(--text);text-decoration:none}
     object-fit:cover;
     display:block;
   }
-  /* Swap: make plane card appear on the left */
+  /* Swap: plane card (second) appears on the left */
   .pgrid .pcard:first-child{order:2}
   .pgrid .pcard:nth-child(2){order:1}
-  /* Slightly lower framing on the right card image for nicer crop */
+  /* Slightly lower framing on the right card image */
   .pgrid .pcard:first-child img{object-position:center 60%}
 }
 
-/* Mobile: cleaner cockpit crop */
+/* Mobile: cleaner crop, especially the plane (second card) */
 @media (max-width:700px){
   .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
   .pcard img{
@@ -332,6 +337,7 @@ a{color:var(--text);text-decoration:none}
     object-fit:cover;
     object-position:center 45%;
   }
+  .pgrid .pcard:nth-child(2) img{object-position:center 40%} /* plane tweak */
   .pcard figcaption{font-size:13px;text-align:center}
 }
 @media (max-width:420px){
