@@ -68,7 +68,6 @@ a{color:var(--text);text-decoration:none}
   flex-wrap:nowrap;
   overflow:visible;
 }
-/* make brand flex & shrinkable so actions never get clipped */
 .brand{flex:1 1 auto;min-width:0}
 .brand-text{
   display:block;
@@ -113,11 +112,15 @@ a{color:var(--text);text-decoration:none}
 }
 
 /* extra-narrow phones: keep buttons visible, avoid clipping */
+@media (max-width:480px){
+  .brand-text{font-size:clamp(16px, 6vw, 20px)}  /* shrink name sooner so it fits */
+}
 @media (max-width:380px){
   .container{padding:0 12px}
   .nav .inner{padding:14px 0}
   .nav-actions{gap:8px}
   .menu{inset-inline-end:12px;max-width:calc(100vw - 16px)}
+  .brand-text{font-size:clamp(14px, 5.6vw, 18px)} /* smallest safe size */
 }
 
 /* ===============================
@@ -306,7 +309,6 @@ a{color:var(--text);text-decoration:none}
     min-height:44px;       /* equal caption blocks */
     display:flex;align-items:center;justify-content:center;text-align:center;
   }
-  /* kill any reveal translation so columns don’t “touch” */
   .reveal,
   .reveal.fade-left,
   .reveal.fade-right{transform:none !important}
@@ -336,24 +338,24 @@ a{color:var(--text);text-decoration:none}
   .pgrid .pcard:first-child img{object-position:center 60%}
 }
 
-/* Mobile: back to full-width single column; clean 16:9 crop; plane recentered */
+/* Mobile: full-width single column; TALLER ratio so it’s not squished */
 @media (max-width:700px){
   .pgrid{grid-template-columns:1fr;gap:16px}
   .pcard img{
     width:100%;
     height:auto;
-    aspect-ratio:16/9;     /* consistent card height from width */
+    aspect-ratio:4/3;      /* taller than 16:9, less squished */
     object-fit:cover;
     object-position:center 50%;
     display:block;
   }
-  /* plane (second card) – nudge focus slightly right & down */
+  /* plane (second card) – keep focus slightly right & down */
   .pgrid .pcard:nth-child(2) img{object-position:60% 55%}
   .pcard figcaption{font-size:13px;text-align:center}
 }
 @media (max-width:420px){
   .pgrid{grid-template-columns:1fr}
-  .pcard img{aspect-ratio:16/9}
+  .pcard img{aspect-ratio:4/3}
 }
 
 /* ===============================
