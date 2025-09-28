@@ -19,6 +19,12 @@
 
   --shadow:0 8px 28px rgba(15,23,42,.06);
   --shadow-strong:0 12px 30px rgba(15,23,42,.12);
+
+  /* Toggle sizing (responsive-safe) */
+  --toggle-w:48px;
+  --toggle-h:26px;
+  --thumb-d:20px;
+  --toggle-pad:3px;
 }
 :root[data-theme="dark"]{
   --bg:#0f1623;
@@ -108,20 +114,35 @@ a{color:var(--text);text-decoration:none}
   color:var(--text);padding:6px 10px;border-radius:12px;cursor:pointer;
 }
 .theme-toggle .toggle-rail{
-  position:relative;width:48px;height:26px;border-radius:999px;background:var(--line);
+  position:relative;width:var(--toggle-w);height:var(--toggle-h);border-radius:999px;background:var(--line);
   display:inline-block;vertical-align:middle;transition:background .15s ease;
+  overflow:hidden; /* prevents thumb from peeking out on tiny widths */
 }
 .theme-toggle .toggle-thumb{
-  position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  position:absolute;top:var(--toggle-pad);left:var(--toggle-pad);
+  width:var(--thumb-d);height:var(--thumb-d);border-radius:50%;
   background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);
   transition:left .18s ease, background .18s ease;
 }
 /* ON state is via [aria-pressed="true"] */
 .theme-toggle[aria-pressed="true"] .toggle-rail{background:var(--accent)}
-.theme-toggle[aria-pressed="true"] .toggle-thumb{left:25px;background:#fff}
+.theme-toggle[aria-pressed="true"] .toggle-thumb{
+  left:calc(var(--toggle-w) - var(--thumb-d) - var(--toggle-pad));
+  background:#fff;
+}
 
 .toggle-label{font-weight:600}
 [data-theme="dark"] .toggle-label{color:var(--text)}
+
+/* Tiny screens: shrink the switch a touch to avoid crowding */
+@media (max-width:380px){
+  :root{
+    --toggle-w:44px;
+    --toggle-h:24px;
+    --thumb-d:18px;
+    --toggle-pad:3px;
+  }
+}
 
 /* ===============================
    HERO
@@ -240,13 +261,13 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: 3-up, with breathing room and fixed image box — */
+/* — Phone: make it 2-up (was 3-up) with a tidy fixed image box — */
 @media (max-width:700px){
-  .gallery{grid-template-columns:repeat(3, 1fr);gap:12px}
+  .gallery{grid-template-columns:repeat(2, 1fr);gap:12px}
   .gallery figure{padding:8px}
   .gallery figure img{
     width:100%;
-    height:150px;
+    height:180px;            /* slightly taller so thumbnails don’t feel cramped */
     object-fit:contain;
     max-height:none;
     background:#eef2ff;
@@ -260,7 +281,8 @@ a{color:var(--text);text-decoration:none}
    =============================== */
 .pgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
-.pcard img{width:100%;height:240px;object-fit:cover;display:block}
+/* Desktop fix: let images use natural height so cards don’t look like wide strips */
+.pcard img{width:100%;height:auto;object-fit:cover;display:block}
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
 @media (max-width:700px){
