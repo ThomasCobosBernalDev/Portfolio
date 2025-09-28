@@ -114,20 +114,32 @@ a{color:var(--text);text-decoration:none}
   color:var(--text);padding:6px 10px;border-radius:12px;cursor:pointer;
 }
 .theme-toggle .toggle-rail{
-  position:relative;width:var(--toggle-w);height:var(--toggle-h);border-radius:999px;background:var(--line);
-  display:inline-block;vertical-align:middle;transition:background .15s ease;
-  overflow:hidden; /* prevents thumb from peeking out on tiny widths */
+  position:relative;
+  width:var(--toggle-w);
+  height:var(--toggle-h);
+  border-radius:999px;
+  background:var(--line);
+  display:inline-block;
+  vertical-align:middle;
+  transition:background .15s ease;
+  overflow:hidden;                 /* no peek-outs */
 }
 .theme-toggle .toggle-thumb{
-  position:absolute;top:var(--toggle-pad);left:var(--toggle-pad);
-  width:var(--thumb-d);height:var(--thumb-d);border-radius:50%;
-  background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);
-  transition:left .18s ease, background .18s ease;
+  position:absolute;
+  top:50%;
+  left:var(--toggle-pad);
+  width:var(--thumb-d);
+  height:var(--thumb-d);
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transform:translate(0,-50%);     /* center vertically */
+  transition:transform .18s ease, background .18s ease;
 }
-/* ON state is via [aria-pressed="true"] */
+/* ON state via [aria-pressed="true"] — move by translateX so we never mis-calc */
 .theme-toggle[aria-pressed="true"] .toggle-rail{background:var(--accent)}
 .theme-toggle[aria-pressed="true"] .toggle-thumb{
-  left:calc(var(--toggle-w) - var(--thumb-d) - var(--toggle-pad));
+  transform:translate(calc(var(--toggle-w) - var(--thumb-d) - var(--toggle-pad) - var(--toggle-pad)), -50%);
   background:#fff;
 }
 
@@ -244,16 +256,18 @@ a{color:var(--text);text-decoration:none}
 .tile-caption{margin-top:12px;text-align:center;color:var(--muted)}
 
 /* ===============================
-   GALLERY (About > Personal Gallery)
-   – mobile 3-up with spacing; desktop auto-fit
+   GALLERY (About > Marine Gallery)
    =============================== */
 .gallery{
   display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   margin-top:16px;
+  justify-items:stretch;
+  align-items:stretch;
 }
 .gallery figure{
   margin:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);
-  box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;align-items:center
+  box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;align-items:center;
+  height:100%;
 }
 .gallery figure img{
   width:100%;height:auto;object-fit:contain;background:#f6f7fb;border-radius:10px;max-height:520px;
@@ -261,14 +275,19 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: make it 2-up (was 3-up) with a tidy fixed image box — */
+/* — Phone: 2-up with equal heights and tidy thumbnails — */
 @media (max-width:700px){
-  .gallery{grid-template-columns:repeat(2, 1fr);gap:12px}
-  .gallery figure{padding:8px}
+  .gallery{
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+    grid-auto-rows:1fr;          /* rows balance; cards align cleanly */
+  }
+  .gallery figure{padding:8px;height:100%}
   .gallery figure img{
     width:100%;
-    height:180px;            /* slightly taller so thumbnails don’t feel cramped */
-    object-fit:contain;
+    height:180px;
+    object-fit:cover;            /* fills the box consistently */
+    object-position:center;
     max-height:none;
     background:#eef2ff;
     border-radius:8px;
@@ -281,13 +300,31 @@ a{color:var(--text);text-decoration:none}
    =============================== */
 .pgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
-/* Desktop fix: let images use natural height so cards don’t look like wide strips */
-.pcard img{width:100%;height:auto;object-fit:cover;display:block}
+/* Desktop: consistent card heights + swap columns (plane left, Ashley right) */
+@media (min-width:701px){
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .pcard{height:100%}
+  .pcard img{
+    width:100%;
+    height:420px;               /* consistent visual weight */
+    object-fit:cover;
+    display:block;
+  }
+  /* Swap order: first card (Ashley) goes right, second (plane) goes left */
+  .pgrid .pcard:first-child{order:2}
+  .pgrid .pcard:nth-child(2){order:1}
+
+  /* Right card (Ashley — originally first): nudge image framing down a bit */
+  .pgrid .pcard:first-child img{object-position:center 60%}
+  /* Give the right caption a touch more spacing */
+  .pgrid .pcard:first-child figcaption{margin-top:16px}
+}
+
 .pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
 
 @media (max-width:700px){
   .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .pcard img{height:180px}
+  .pcard img{height:180px;object-fit:cover}
   .pcard figcaption{font-size:13px;text-align:center}
 }
 @media (max-width:420px){
@@ -314,20 +351,11 @@ a{color:var(--text);text-decoration:none}
 /* ===============================
    ABOUT — LEFT align copy + chips (WIDER copy)
    =============================== */
-#about{
-  text-align:left;
-}
-#about .lead{
-  max-width:1000px;
-  margin:0;
-}
-#about .tags{
-  justify-content:flex-start;
-}
+#about{ text-align:left; }
+#about .lead{ max-width:1000px; margin:0; }
+#about .tags{ justify-content:flex-start; }
 
-/* ===== Overrides to guarantee layout intent ===== */
-
-/* Keep hero headline + subtitle centered on all screens */
+/* ===== Intent overrides (keep hero centered; about left) ===== */
 .hero .container.wrap,
 .hero .wrap{
   display:flex !important;
@@ -336,24 +364,12 @@ a{color:var(--text);text-decoration:none}
   text-align:center !important;
   gap:28px;
 }
-
 .hero .meta-line{ justify-content:center !important; }
-
 .hero .lead{
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
 }
-
-/* About: force everything back to LEFT */
-#about .container{
-  text-align: left !important;
-}
-#about .lead{
-  text-align: left !important;
-  margin: 0 !important;
-  max-width: 1000px !important;
-}
-#about .tags{
-  justify-content: flex-start !important;
-}
+#about .container{ text-align:left !important; }
+#about .lead{ text-align:left !important; margin:0 !important; max-width:1000px !important; }
+#about .tags{ justify-content:flex-start !important; }
