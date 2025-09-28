@@ -112,17 +112,19 @@ a{color:var(--text);text-decoration:none}
   display:inline-flex;align-items:center;gap:10px;
   border:1px solid var(--line);background:var(--panel);
   color:var(--text);padding:6px 10px;border-radius:12px;cursor:pointer;
+  white-space:nowrap; /* stop label wrapping that can crush the rail */
 }
 .theme-toggle .toggle-rail{
   position:relative;
   width:var(--toggle-w);
+  min-width:var(--toggle-w);       /* rail never shrinks on mobile */
   height:var(--toggle-h);
   border-radius:999px;
   background:var(--line);
   display:inline-block;
   vertical-align:middle;
   transition:background .15s ease;
-  overflow:hidden;                 /* no peek-outs */
+  overflow:hidden;                  /* no thumb peek */
 }
 .theme-toggle .toggle-thumb{
   position:absolute;
@@ -133,26 +135,23 @@ a{color:var(--text);text-decoration:none}
   border-radius:50%;
   background:#fff;
   box-shadow:0 2px 6px rgba(0,0,0,.25);
-  transform:translate(0,-50%);     /* center vertically */
-  transition:transform .18s ease, background .18s ease;
+  transform:translate(0,-50%);      /* vertical centering */
+  transition:transform .18s ease;
+  will-change:transform;
 }
-/* ON state via [aria-pressed="true"] — move by translateX so we never mis-calc */
+/* ON state: slide strictly within the rail width (no clipping) */
 .theme-toggle[aria-pressed="true"] .toggle-rail{background:var(--accent)}
 .theme-toggle[aria-pressed="true"] .toggle-thumb{
-  transform:translate(calc(var(--toggle-w) - var(--thumb-d) - var(--toggle-pad) - var(--toggle-pad)), -50%);
-  background:#fff;
+  transform:translate(calc(var(--toggle-w) - var(--thumb-d) - (var(--toggle-pad) * 2)), -50%);
 }
 
-.toggle-label{font-weight:600}
-[data-theme="dark"] .toggle-label{color:var(--text)}
-
-/* Tiny screens: shrink the switch a touch to avoid crowding */
+/* Tiny screens: slightly smaller switch so it always fits */
 @media (max-width:380px){
   :root{
     --toggle-w:44px;
     --toggle-h:24px;
     --thumb-d:18px;
-    --toggle-pad:3px;
+    --toggle-pad:4px;               /* extra inset avoids visual clipping */
   }
 }
 
@@ -275,24 +274,30 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: 2-up with equal heights and tidy thumbnails — */
+/* — Phone: hard 2-up alignment, equal cards */
 @media (max-width:700px){
   .gallery{
     grid-template-columns:repeat(2, 1fr);
     gap:12px;
-    grid-auto-rows:1fr;          /* rows balance; cards align cleanly */
   }
   .gallery figure{padding:8px;height:100%}
   .gallery figure img{
     width:100%;
-    height:180px;
-    object-fit:cover;            /* fills the box consistently */
+    height:200px;          /* fixed thumb height: keeps rows aligned */
+    object-fit:cover;
     object-position:center;
     max-height:none;
     background:#eef2ff;
     border-radius:8px;
   }
-  .gallery figure figcaption{font-size:12px}
+  .gallery figure figcaption{
+    font-size:12px;
+    min-height:44px;       /* equalize caption block height */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
 }
 
 /* ===============================
@@ -300,31 +305,33 @@ a{color:var(--text);text-decoration:none}
    =============================== */
 .pgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
-/* Desktop: consistent card heights + swap columns (plane left, Ashley right) */
+.pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
+
+/* Desktop: swapped columns + consistent image height */
 @media (min-width:701px){
   .pgrid{grid-template-columns:repeat(2,1fr)}
   .pcard{height:100%}
   .pcard img{
     width:100%;
-    height:420px;               /* consistent visual weight */
+    height:420px;
     object-fit:cover;
     display:block;
   }
-  /* Swap order: first card (Ashley) goes right, second (plane) goes left */
+  /* Swap: make plane card appear on the left */
   .pgrid .pcard:first-child{order:2}
   .pgrid .pcard:nth-child(2){order:1}
-
-  /* Right card (Ashley — originally first): nudge image framing down a bit */
+  /* Slightly lower framing on the right card image for nicer crop */
   .pgrid .pcard:first-child img{object-position:center 60%}
-  /* Give the right caption a touch more spacing */
-  .pgrid .pcard:first-child figcaption{margin-top:16px}
 }
 
-.pcard figcaption{padding:10px 12px;color:var(--muted);font-size:14px}
-
+/* Mobile: cleaner cockpit crop */
 @media (max-width:700px){
   .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .pcard img{height:180px;object-fit:cover}
+  .pcard img{
+    height:190px;
+    object-fit:cover;
+    object-position:center 45%;
+  }
   .pcard figcaption{font-size:13px;text-align:center}
 }
 @media (max-width:420px){
