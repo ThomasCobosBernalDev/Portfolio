@@ -71,7 +71,7 @@ a{color:var(--text);text-decoration:none}
   font-weight:900;letter-spacing:.3px;
   font-size:clamp(18px,3vw,24px);
   white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis; /* prevent pushing buttons offscreen */
+  overflow:hidden;text-overflow:ellipsis;
 }
 
 /* actions (toggle + burger) */
@@ -279,7 +279,7 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: hard 2-up + fix reveal drift */
+/* — Phone: hard 2-up + kill reveal offsets so gaps are even */
 @media (max-width:700px){
   .gallery{
     grid-template-columns:repeat(2, 1fr);
@@ -300,9 +300,8 @@ a{color:var(--text);text-decoration:none}
     min-height:44px;       /* equal caption blocks */
     display:flex;align-items:center;justify-content:center;text-align:center;
   }
-  /* kill horizontal offsets from fade-left/right on small screens */
-  .reveal.fade-left,
-  .reveal.fade-right{ transform:translateY(16px) !important; }
+  /* Neutralize all reveal transforms on small screens (prevents drift) */
+  .reveal{transform:none !important}
 }
 
 /* ===============================
@@ -329,20 +328,21 @@ a{color:var(--text);text-decoration:none}
   .pgrid .pcard:first-child img{object-position:center 60%}
 }
 
-/* Mobile: cleaner crop, especially the plane (second card) */
+/* Mobile: back to full-width single column; better plane crop */
 @media (max-width:700px){
-  .pgrid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .pgrid{grid-template-columns:1fr;gap:16px}
   .pcard img{
-    height:190px;
+    height:240px;
     object-fit:cover;
     object-position:center 45%;
   }
-  .pgrid .pcard:nth-child(2) img{object-position:center 40%} /* plane tweak */
+  /* plane (second card) crop tweak for nicer composition */
+  .pgrid .pcard:nth-child(2) img{object-position:center 40%}
   .pcard figcaption{font-size:13px;text-align:center}
 }
 @media (max-width:420px){
   .pgrid{grid-template-columns:1fr}
-  .pcard img{height:auto;max-height:260px;object-fit:cover}
+  .pcard img{height:220px}
 }
 
 /* ===============================
