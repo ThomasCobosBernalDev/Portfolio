@@ -106,21 +106,21 @@ a{color:var(--text);text-decoration:none}
     display:none;flex-direction:column;align-items:flex-start;
     background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;gap:8px;
     box-shadow:var(--shadow-strong);
-    max-width:min(280px, calc(100vw - 24px)); /* keep inside viewport */
+    max-width:min(280px, calc(100vw - 24px));
   }
   .menu.open{display:flex}
 }
 
 /* extra-narrow phones: keep buttons visible, avoid clipping */
 @media (max-width:480px){
-  .brand-text{font-size:clamp(16px, 6vw, 20px)}  /* shrink name sooner so it fits */
+  .brand-text{font-size:clamp(16px, 6vw, 20px)}
 }
 @media (max-width:380px){
   .container{padding:0 12px}
   .nav .inner{padding:14px 0}
   .nav-actions{gap:8px}
   .menu{inset-inline-end:12px;max-width:calc(100vw - 16px)}
-  .brand-text{font-size:clamp(14px, 5.6vw, 18px)} /* smallest safe size */
+  .brand-text{font-size:clamp(14px, 5.6vw, 18px)}
 }
 
 /* ===============================
@@ -288,26 +288,36 @@ a{color:var(--text);text-decoration:none}
 :root[data-theme="dark"] .gallery figure img{background:#1b2232}
 .gallery figure figcaption{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
 
-/* — Phone: hard 2-up; neutralize reveal offsets so gaps are even */
-@media (max-width:700px){
+/* ===== Desktop-only equalization for Marine Gallery ===== */
+@media (min-width:861px){
   .gallery{
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(4, minmax(240px, 1fr));
+    align-items:stretch;
+    gap:20px;
   }
-  .gallery{gap:12px}
-  .gallery figure{padding:8px;height:100%}
+  .gallery figure{height:100%}
   .gallery figure img{
-    width:100%;
-    height:200px;          /* fixed thumb height keeps rows aligned */
-    object-fit:cover;
-    object-position:center;
-    max-height:none;
-    background:#eef2ff;
-    border-radius:8px;
+    aspect-ratio:4/3;      /* consistent crop */
+    object-fit:cover;      /* fill the frame */
+    max-height:none;       /* let aspect-ratio drive height */
+    background:#f6f7fb;
   }
   .gallery figure figcaption{
-    font-size:12px;
-    min-height:44px;       /* equal caption blocks */
+    min-height:54px;       /* balance captions so cards match */
     display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+}
+
+/* — Phone: hard 2-up; neutralize reveal offsets so gaps are even */
+@media (max-width:700px){
+  .gallery{grid-template-columns:repeat(2, 1fr);gap:12px}
+  .gallery figure{padding:8px;height:100%}
+  .gallery figure img{
+    width:100%;height:200px;object-fit:cover;object-position:center;max-height:none;
+    background:#eef2ff;border-radius:8px;
+  }
+  .gallery figure figcaption{
+    font-size:12px;min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;
   }
   .reveal,
   .reveal.fade-left,
@@ -338,18 +348,17 @@ a{color:var(--text);text-decoration:none}
   .pgrid .pcard:first-child img{object-position:center 60%}
 }
 
-/* Mobile: full-width single column; TALLER ratio so it’s not squished */
+/* Mobile: full-width single column; taller 4:3 ratio */
 @media (max-width:700px){
   .pgrid{grid-template-columns:1fr;gap:16px}
   .pcard img{
     width:100%;
     height:auto;
-    aspect-ratio:4/3;      /* taller than 16:9, less squished */
+    aspect-ratio:4/3;
     object-fit:cover;
     object-position:center 50%;
     display:block;
   }
-  /* plane (second card) – keep focus slightly right & down */
   .pgrid .pcard:nth-child(2) img{object-position:60% 55%}
   .pcard figcaption{font-size:13px;text-align:center}
 }
